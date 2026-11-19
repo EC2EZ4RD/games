@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>{{title}} · 小游戏合集</title>
+  <meta name="description" content="{{title}}：{{count}} 款打开网页就能玩的小游戏，手机和电脑都能玩。{{names}}" />
+  <meta property="og:title" content="{{title}} · 小游戏合集" />
+  <meta property="og:description" content="{{count}} 款打开网页就能玩的小游戏：{{names}}" />
+  <meta name="theme-color" content="#f3ede2" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#16141c" media="(prefers-color-scheme: dark)" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="preload" href="fonts/hub-display.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="hub.css" />
+</head>
+<body>
+  {{icons}}
+  <header class="top">
+    <div class="brand">
+      {{mark}}
+      <div>
+        <h1>{{title}}</h1>
+        <p>{{tagline}} <span class="count">{{count}} 款</span></p>
+      </div>
+    </div>
+    <div class="hub-qr">
+      <div><b>手机扫一扫</b>在手机上打开这里</div>
+      <img src="qr/hub.svg" alt="本页的二维码" width="84" height="84" />
+    </div>
+  </header>
+
+  <main class="grid">
+{{cards}}
+  </main>
+
+  <footer class="foot">
+    <span><svg class="i"><use href="#i-save"/></svg>存档只留在你这台设备的浏览器里，换设备或清缓存会重新开始</span>
+    <span><svg class="i"><use href="#i-code"/></svg>标题字体改自 atelierAnchor 的得意黑（SIL OFL 1.1）· <a href="licenses.txt">第三方许可</a></span>
+  </footer>
+  <script src="hub.js"></script>
+</body>
+</html>

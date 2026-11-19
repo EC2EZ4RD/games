@@ -1,0 +1,9 @@
+node_modules/
+# build output: published to the gh-pages branch by scripts/publish.mjs, never committed on main
+site/
+.stage/
+.shots/
+*.log
+
+# private words for scripts/check.mjs
+check.local.json

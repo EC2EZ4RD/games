@@ -1,0 +1,17 @@
+{
+  "name": "games-hub",
+  "private": true,
+  "type": "module",
+  "description": "The game hub: every game's plain-web build behind one page, published to GitHub Pages.",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "hub": "node scripts/build.mjs --hub-only",
+    "serve": "node scripts/serve.mjs",
+    "covers": "node scripts/covers.mjs",
+    "check": "node scripts/check.mjs",
+    "publish": "node scripts/publish.mjs"
+  },
+  "devDependencies": {
+    "qrcode": "^1.5.4"
+  }
+}
