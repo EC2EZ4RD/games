@@ -52,7 +52,7 @@ async function visit(name, url, view) {
   }
   await page.waitForTimeout(SECS * 1000);
   if (await page.evaluate(() => !!document.getElementById('hub-ld')).catch(() => false)) problems.push(`the loading screen is still up after ${SECS} s`);
-  const file = join(OUT, `${name}-${view}.png`);
+  const file = join(OUT, `${name.replace(/\//g, '__')}-${view}.png`); // ad_games/<game> → one flat file
   await page.screenshot({ path: file }).catch((e) => problems.push(`screenshot: ${e.message}`));
   const title = await page.title().catch(() => '');
   await context.close();
@@ -64,8 +64,12 @@ const results = [];
 if (!only.length || only.includes('hub')) {
   for (const view of ['phone-portrait', 'desktop']) results.push(await visit('hub', BASE, view));
 }
+for (const c of site.collections ?? []) {
+  if (only.length && !only.includes(c.slug)) continue;
+  for (const view of ['phone-portrait', 'desktop']) results.push(await visit(c.slug, `${BASE}${c.slug}/`, view));
+}
 for (const g of site.games) {
-  if (only.length && !only.includes(g.slug)) continue; // site/games.json lists only built games
+  if (only.length && !only.includes(g.slug) && !only.includes(g.collection)) continue; // site/games.json lists only built games
   const phone = g.screen === 'landscape' ? 'phone-landscape' : 'phone-portrait';
   const list = g.screen === 'desktop' ? ['desktop'] : [...(views.includes('phone') ? [phone] : []), ...(views.includes('desktop') ? ['desktop'] : [])];
   for (const view of list) results.push(await visit(g.slug, `${BASE}${g.slug}/`, view));

@@ -1,6 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
   <defs>
     <!-- 24x24, stroked with currentColor unless filled; drawn for this hub -->
+    <symbol id="i-grid" viewBox="0 0 24 24"><g fill="currentColor"><rect x="4" y="4" width="6.5" height="6.5" rx="1.6"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.6"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.6"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.6"/></g></symbol>
     <symbol id="i-portrait" viewBox="0 0 24 24"><rect x="7" y="2.5" width="10" height="19" rx="2.2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10.5 18.2h3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
     <symbol id="i-landscape" viewBox="0 0 24 24"><rect x="2.5" y="7" width="19" height="10" rx="2.2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M18.2 10.5v3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
     <symbol id="i-desktop" viewBox="0 0 24 24"><rect x="2.5" y="4" width="19" height="12.5" rx="1.6" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 16.5v4M8 20.5h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>

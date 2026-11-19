@@ -141,9 +141,11 @@ export function injectLoader({ site, game, onAccent }) {
   const ink = '#221f2e';
   const small = onAccent === '#ffffff' ? 'rgba(255,255,255,.92)' : ink;
   const cfg = JSON.stringify({ files: list, total }).replace(/</g, '\\u003c');
+  // the site root seen from the game's page: ../ for site/<slug>/, ../../ for site/<collection>/<game>/
+  const root = '../'.repeat(game.slug.split('/').length);
   const block = `${START}
 <style>
-@font-face{font-family:'Hub Display';src:url('../fonts/hub-display.woff2') format('woff2');font-display:swap}
+@font-face{font-family:'Hub Display';src:url('${root}fonts/hub-display.woff2') format('woff2');font-display:swap}
 #hub-ld{position:fixed;top:0;left:0;right:0;bottom:0;z-index:2147483000;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;box-sizing:border-box;background:${accent};background:radial-gradient(120% 80% at 82% 0%,rgba(255,255,255,.3),rgba(255,255,255,0) 62%),linear-gradient(165deg,${mix(accent, '#ffffff', 0.18)},${accent} 55%,${mix(accent, '#000000', 0.28)});color:#fff;font-family:system-ui,-apple-system,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;text-align:center;opacity:1;transition:opacity .4s ease;-webkit-user-select:none;user-select:none;touch-action:none}
 #hub-ld.out{opacity:0;pointer-events:none}
 #hub-ld *{box-sizing:border-box}

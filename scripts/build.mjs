@@ -25,12 +25,13 @@ const manifest = JSON.parse(readFileSync(join(HUB, 'games.json'), 'utf8'));
 const args = process.argv.slice(2);
 const skipBuild = args.includes('--skip-build');
 const hubOnly = args.includes('--hub-only');
+// a collection's slug (`ad_games`) stands for every game in it
 const wanted = args.filter((a) => !a.startsWith('--'));
-const unknown = wanted.filter((s) => !manifest.games.some((g) => g.slug === s));
+const unknown = wanted.filter((s) => !manifest.games.some((g) => g.slug === s || g.collection === s));
 if (unknown.length) throw new Error(`not in games.json: ${unknown.join(', ')}`);
 
 mkdirSync(SITE, { recursive: true });
-const games = hubOnly ? [] : manifest.games.filter((g) => !wanted.length || wanted.includes(g.slug));
+const games = hubOnly ? [] : manifest.games.filter((g) => !wanted.length || wanted.includes(g.slug) || wanted.includes(g.collection));
 
 for (const g of games) {
   const dir = resolve(HUB, g.dir);
@@ -42,8 +43,9 @@ for (const g of games) {
     console.log(`\n=== ${g.slug}: ${cmd}  (in ${dir})`);
     execSync(cmd, { cwd: dir, stdio: 'inherit', shell: true });
   }
-  const dest = join(SITE, g.slug);
+  const dest = join(SITE, g.slug); // site/<slug>, or site/<collection>/<game> for a collection's game
   rmSync(dest, { recursive: true, force: true });
+  mkdirSync(dirname(dest), { recursive: true });
   if (g.copy) {
     for (const p of g.copy) cpSync(join(dir, p), join(dest, p), { recursive: true });
   } else {
@@ -92,6 +94,14 @@ function licenses(games) {
     parts.get(key).users.add(user);
   };
   const licenseFile = (dir) => ['LICENSE', 'LICENSE.md', 'LICENSE.txt', 'license', 'LICENCE'].map((f) => join(dir, f)).find(existsSync);
+  // a dependency of a game in an npm workspace (ad-games) is hoisted to an ancestor's node_modules
+  const findPackage = (dir, dep) => {
+    for (let d = dir; ; d = dirname(d)) {
+      const p = join(d, 'node_modules', dep);
+      if (existsSync(join(p, 'package.json'))) return p;
+      if (dirname(d) === d) return null;
+    }
+  };
   const fontLicenses = (dir) => ['src/assets/fonts', 'fonts', 'public/fonts']
     .map((d) => join(dir, d)).filter(existsSync)
     .flatMap((d) => readdirSync(d).filter((f) => /^(OFL|LICEN[CS]E).*\.txt$/i.test(f)).map((f) => join(d, f)));
@@ -100,13 +110,20 @@ function licenses(games) {
     const pkgFile = join(dir, 'package.json');
     const deps = existsSync(pkgFile) ? Object.keys(JSON.parse(readFileSync(pkgFile, 'utf8')).dependencies ?? {}) : [];
     for (const dep of deps) {
-      const pkgDir = join(dir, 'node_modules', dep);
+      const pkgDir = findPackage(dir, dep) ?? join(dir, 'node_modules', dep);
       const file = licenseFile(pkgDir);
       if (!file) { console.warn(`!! ${g.slug}: no licence file for ${dep}`); continue; }
       const version = JSON.parse(readFileSync(join(pkgDir, 'package.json'), 'utf8')).version;
       add(`${dep} ${version}`, g.title, file);
     }
     for (const f of fontLicenses(dir)) add(`字体 ${f.replace(/^.*[\\/]/, '').replace(/\.txt$/i, '')}`, g.title, f);
+    // licence texts a game names itself (games.json `licenseFiles`, relative to its folder): e.g. the
+    // ad games' shared font, whose OFL text lives in ad-games/kit
+    for (const rel of g.licenseFiles ?? []) {
+      const f = resolve(dir, rel);
+      if (existsSync(f)) add(`字体 ${f.replace(/^.*[\\/]/, '').replace(/\.txt$/i, '')}`, g.title, f);
+      else console.warn(`!! ${g.slug}: licence file missing: ${rel}`);
+    }
   }
   add('字体 OFL-SmileySans（大厅标题，改名为 Hub Display）', '大厅', join(HUB, 'fonts-src', 'OFL-SmileySans.txt'));
   const rule = '='.repeat(72);

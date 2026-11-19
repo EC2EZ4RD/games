@@ -54,6 +54,18 @@ node scripts/publish.mjs         # 检查通过后把 site/ 提交到 gh-pages �
    `accent`、`dir`，以及 `build` + `out`，或者纯静态游戏用 `copy`。
 4. `node scripts/build.mjs <slug>`、`node scripts/covers.mjs <slug>`、`node scripts/build.mjs --hub-only`，看一眼，发布。
 
+## 合集（真·广告游戏）
+
+一批同类的游戏可以收进一个合集：大厅首页只放一张合集卡片（封面是前三款的画面扇形摆开），点进去是合集自己的页面
+（<https://ec2ez4rd.github.io/games/ad_games/>），游戏在 `site/<合集>/<游戏>/` 下面。
+
+- `games.json` 的 `collections` 里写合集：`slug`（目录名，如 `ad_games`）、`title`、`tagline`、`pitch`、`status`、`accent`、
+  `position`（首页第几张，0 是第一张）。
+- 合集里的游戏 `slug` 带上合集目录（`ad_games/number-hero`），再加 `"collection": "ad_games"`；`licenseFiles` 可以列出
+  要汇总的许可原文（相对游戏目录）。真·广告游戏的源码在 `../ad-games/games/<游戏>`（npm workspaces，依赖装在 `../ad-games/node_modules`）。
+- 合集的 slug 可以当成一个整体用：`node scripts/build.mjs ad_games`、`node scripts/covers.mjs ad_games`、`node scripts/smoke.mjs ad_games`。
+- 加了新游戏后标题字体会缺字：`node scripts/build.mjs --hub-only` 之后跑 `python scripts/fonts.py`，再 `--hub-only` 一次。
+
 ## 许可
 
 大厅的字体和各游戏用到的第三方代码、字体的许可原文，构建时汇总在 `site/licenses.txt`（线上是

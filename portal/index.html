@@ -2,6 +2,7 @@
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8" />
+  {{base}}
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>{{title}} · 小游戏合集</title>
   <meta name="description" content="{{title}}：{{count}} 款打开网页就能玩的小游戏，手机和电脑都能玩。{{names}}" />
@@ -19,13 +20,14 @@
     <div class="brand">
       {{mark}}
       <div>
+        {{back}}
         <h1>{{title}}</h1>
         <p>{{tagline}} <span class="count">{{count}} 款</span></p>
       </div>
     </div>
     <div class="hub-qr">
       <div><b>手机扫一扫</b>在手机上打开这里</div>
-      <img src="qr/hub.svg" alt="本页的二维码" width="84" height="84" />
+      <img src="{{qr}}" alt="本页的二维码" width="84" height="84" />
     </div>
   </header>
 

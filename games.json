@@ -2,6 +2,17 @@
   "title": "有限进步",
   "tagline": "打开网页就能玩的小游戏",
   "url": "https://ec2ez4rd.github.io/games/",
+  "collections": [
+    {
+      "slug": "ad_games",
+      "title": "真·广告游戏",
+      "tagline": "广告里那个，这回是真的",
+      "pitch": "那些点进去却不是它的小游戏广告，一款款做成了真的。",
+      "status": "beta",
+      "accent": "#ff5c8a",
+      "position": 0
+    }
+  ],
   "games": [
     {
       "slug": "meow-planet",
@@ -119,6 +130,470 @@
       "out": "{stage}",
       "coverQuery": "?army=spear:zhang,archer:chen,rider:hu,militia:meng&foe=sword,hammer,rider,archer",
       "coverWait": 14
+    },
+    {
+      "slug": "ad_games/gate-shooter",
+      "title": "数字门",
+      "pitch": "带着小队冲过 ×3、+10 的门，从 1 人打到 1 万人。",
+      "genre": "动作",
+      "screen": "portrait",
+      "status": "beta",
+      "collection": "ad_games",
+      "accent": "#ff7a3d",
+      "dir": "../ad-games/games/gate-shooter",
+      "build": "npm run build:web",
+      "out": "dist-web",
+      "licenseFiles": [
+        "../../kit/fonts-src/OFL-SmileySans.txt"
+      ]
+    },
+    {
+      "slug": "ad_games/number-hero",
+      "title": "数字勇者",
+      "pitch": "只打比你小的怪，拔销子放岩浆烧掉打不过的，从 6 打到 9999。",
+      "genre": "解谜",
+      "screen": "portrait",
+      "status": "beta",
+      "collection": "ad_games",
+      "accent": "#4f7cff",
+      "dir": "../ad-games/games/number-hero",
+      "build": "npm run build:web",
+      "out": "dist-web",
+      "licenseFiles": [
+        "../../kit/fonts-src/OFL-SmileySans.txt"
+      ]
+    },
+    {
+      "slug": "ad_games/sheep-tiles",
+      "title": "叠叠喵",
+      "pitch": "猫的宝贝堆成山，三个一样就消掉，篮子满七格就输。",
+      "genre": "休闲",
+      "screen": "portrait",
+      "status": "beta",
+      "collection": "ad_games",
+      "accent": "#ff8a3d",
+      "dir": "../ad-games/games/sheep-tiles",
+      "build": "npm run build:web",
+      "out": "dist-web",
+      "licenseFiles": [
+        "../../kit/fonts-src/OFL-SmileySans.txt"
+      ]
+    },
+    {
+      "slug": "ad_games/water-sort",
+      "title": "倒水排序",
+      "pitch": "彩色的水倒来倒去，一管一色，倒满就盖上塞子。",
+      "genre": "解谜",
+      "screen": "portrait",
+      "status": "beta",
+      "collection": "ad_games",
+      "accent": "#3d8bff",
+      "dir": "../ad-games/games/water-sort",
+      "build": "npm run build:web",
+      "out": "dist-web",
+      "licenseFiles": [
+        "../../kit/fonts-src/OFL-SmileySans.txt"
+      ]
+    },
+    {
+      "slug": "ad_games/pin-rescue",
+      "title": "拔销救人",
+      "pitch": "按顺序拔销子，让岩浆、水和金子各去该去的地方。",
+      "genre": "解谜",
+      "screen": "portrait",
+      "status": "beta",
+      "collection": "ad_games",
+      "accent": "#ff5c8a",
+      "dir": "../ad-games/games/pin-rescue",
+      "build": "npm run build:web",
+      "out": "dist-web",
+      "licenseFiles": [
+        "../../kit/fonts-src/OFL-SmileySans.txt"
+      ]
+    },
+    {
+      "slug": "ad_games/dog-line",
+      "title": "画线救狗",
+      "pitch": "一笔画出挡板，护住狗狗撑过蜂群的 10 秒。",
+      "genre": "解谜",
+      "screen": "portrait",
+      "status": "beta",
+      "collection": "ad_games",
+      "accent": "#ff5c8a",
+      "dir": "../ad-games/games/dog-line",
+      "build": "npm run build:web",
+      "out": "dist-web",
+      "licenseFiles": [
+        "../../kit/fonts-src/OFL-SmileySans.txt"
+      ]
+    },
+    {
+      "slug": "ad_games/number-fish",
+      "title": "数字大鱼吃小鱼",
+      "pitch": "只吃数字比你小的鱼，越吃越大，最后吞掉巨鱼。",
+      "genre": "动作",
+      "screen": "portrait",
+      "status": "beta",
+      "collection": "ad_games",
+      "accent": "#ff8a1f",
+      "dir": "../ad-games/games/number-fish",
+      "build": "npm run build:web",
+      "out": "dist-web",
+      "licenseFiles": [
+        "../../kit/fonts-src/OFL-SmileySans.txt"
+      ]
+    },
+    {
+      "slug": "ad_games/black-hole",
+      "title": "黑洞吞噬",
+      "pitch": "拖着黑洞吞掉比它小的一切，最后吞下戴王冠的坦克。",
+      "genre": "动作",
+      "screen": "portrait",
+      "status": "beta",
+      "collection": "ad_games",
+      "accent": "#6f7bff",
+      "dir": "../ad-games/games/black-hole",
+      "build": "npm run build:web",
+      "out": "dist-web",
+      "licenseFiles": [
+        "../../kit/fonts-src/OFL-SmileySans.txt"
+      ]
+    },
+    {
+      "slug": "ad_games/spin-knives",
+      "title": "转刀",
+      "pitch": "刀越转越多，撞散人群，把对手的刀圈切开。",
+      "genre": "动作",
+      "screen": "portrait",
+      "status": "beta",
+      "collection": "ad_games",
+      "accent": "#d9534a",
+      "dir": "../ad-games/games/spin-knives",
+      "build": "npm run build:web",
+      "out": "dist-web",
+      "licenseFiles": [
+        "../../kit/fonts-src/OFL-SmileySans.txt"
+      ]
+    },
+    {
+      "slug": "ad_games/bow-runner",
+      "title": "神弓进化",
+      "pitch": "一路射穿石块、捡零件，木弓进化到雷霆弓。",
+      "genre": "射击",
+      "screen": "portrait",
+      "status": "beta",
+      "collection": "ad_games",
+      "accent": "#3f9e5a",
+      "dir": "../ad-games/games/bow-runner",
+      "build": "npm run build:web",
+      "out": "dist-web",
+      "licenseFiles": [
+        "../../kit/fonts-src/OFL-SmileySans.txt"
+      ]
+    },
+    {
+      "slug": "ad_games/stair-run",
+      "title": "搭楼梯",
+      "pitch": "一路捡木板，铺过断口、搭上高台，爬得比对手高。",
+      "genre": "休闲",
+      "screen": "portrait",
+      "status": "beta",
+      "collection": "ad_games",
+      "accent": "#e8893a",
+      "dir": "../ad-games/games/stair-run",
+      "build": "npm run build:web",
+      "out": "dist-web",
+      "licenseFiles": [
+        "../../kit/fonts-src/OFL-SmileySans.txt"
+      ]
+    },
+    {
+      "slug": "ad_games/arrow-out",
+      "title": "箭头消除",
+      "pitch": "点一支箭，前面没挡着就顺着身子滑出去，清空整张图。",
+      "genre": "解谜",
+      "screen": "portrait",
+      "status": "beta",
+      "collection": "ad_games",
+      "accent": "#ff9f43",
+      "dir": "../ad-games/games/arrow-out",
+      "build": "npm run build:web",
+      "out": "dist-web",
+      "licenseFiles": [
+        "../../kit/fonts-src/OFL-SmileySans.txt"
+      ]
+    },
+    {
+      "slug": "ad_games/rope-untangle",
+      "title": "理线",
+      "pitch": "缠成一团的电线，插头挪个孔就理顺了，电器跟着亮起来。",
+      "genre": "解谜",
+      "screen": "portrait",
+      "status": "beta",
+      "collection": "ad_games",
+      "accent": "#4f8cff",
+      "dir": "../ad-games/games/rope-untangle",
+      "build": "npm run build:web",
+      "out": "dist-web",
+      "licenseFiles": [
+        "../../kit/fonts-src/OFL-SmileySans.txt"
+      ]
+    },
+    {
+      "slug": "ad_games/fish-scale",
+      "title": "钓鱼刮鱼鳞",
+      "pitch": "案板上刮飞鱼鳞，钓遍五片海，刮干净深渊鳞王。",
+      "genre": "休闲",
+      "screen": "portrait",
+      "status": "beta",
+      "collection": "ad_games",
+      "accent": "#ff7043",
+      "dir": "../ad-games/games/fish-scale",
+      "build": "npm run build:web",
+      "out": "dist-web",
+      "licenseFiles": [
+        "../../kit/fonts-src/OFL-SmileySans.txt"
+      ]
+    },
+    {
+      "slug": "ad_games/island-wait",
+      "title": "荒岛等救援",
+      "pitch": "四个人流落荒岛，分水、派活、烧信号，撑到获救。",
+      "genre": "策略",
+      "screen": "portrait",
+      "status": "beta",
+      "collection": "ad_games",
+      "accent": "#ff8a3d",
+      "dir": "../ad-games/games/island-wait",
+      "build": "npm run build:web",
+      "out": "dist-web",
+      "licenseFiles": [
+        "../../kit/fonts-src/OFL-SmileySans.txt"
+      ]
+    },
+    {
+      "slug": "ad_games/bunny-biz",
+      "title": "开店创业",
+      "pitch": "从一个烤串摊开到一整条街，烤串、奶茶、面馆、澡堂、甜品店。",
+      "genre": "休闲",
+      "screen": "portrait",
+      "status": "beta",
+      "collection": "ad_games",
+      "accent": "#ff7043",
+      "dir": "../ad-games/games/bunny-biz",
+      "build": "npm run build:web",
+      "out": "dist-web",
+      "licenseFiles": [
+        "../../kit/fonts-src/OFL-SmileySans.txt"
+      ]
+    },
+    {
+      "slug": "ad_games/turret-horde",
+      "title": "守路打尸潮",
+      "pitch": "守住沙袋后的路，升级挑卡，打退一波比一波大的尸潮。",
+      "genre": "射击",
+      "screen": "portrait",
+      "status": "beta",
+      "collection": "ad_games",
+      "accent": "#e84a3c",
+      "dir": "../ad-games/games/turret-horde",
+      "build": "npm run build:web",
+      "out": "dist-web",
+      "licenseFiles": [
+        "../../kit/fonts-src/OFL-SmileySans.txt"
+      ]
+    },
+    {
+      "slug": "ad_games/dorm-defense",
+      "title": "躺平发育",
+      "pitch": "躺床上赚金币，升级门和炮台，扛住猎梦者整夜砸门。",
+      "genre": "策略",
+      "screen": "portrait",
+      "status": "beta",
+      "collection": "ad_games",
+      "accent": "#ffb03a",
+      "dir": "../ad-games/games/dorm-defense",
+      "build": "npm run build:web",
+      "out": "dist-web",
+      "licenseFiles": [
+        "../../kit/fonts-src/OFL-SmileySans.txt"
+      ]
+    },
+    {
+      "slug": "ad_games/car-jam",
+      "title": "挪车",
+      "pitch": "车一开就停不下来，先挪哪辆，才不会把停车场堵死。",
+      "genre": "解谜",
+      "screen": "portrait",
+      "status": "beta",
+      "collection": "ad_games",
+      "accent": "#4f8cff",
+      "dir": "../ad-games/games/car-jam",
+      "build": "npm run build:web",
+      "out": "dist-web",
+      "licenseFiles": [
+        "../../kit/fonts-src/OFL-SmileySans.txt"
+      ]
+    },
+    {
+      "slug": "ad_games/word-merge",
+      "title": "拼字成词",
+      "pitch": "把字拖到一起拼成词，小心拼了一个却剩下拼不成的。",
+      "genre": "解谜",
+      "screen": "portrait",
+      "status": "beta",
+      "collection": "ad_games",
+      "accent": "#e2483d",
+      "dir": "../ad-games/games/word-merge",
+      "build": "npm run build:web",
+      "out": "dist-web",
+      "licenseFiles": [
+        "../../kit/fonts-src/OFL-SmileySans.txt"
+      ]
+    },
+    {
+      "slug": "ad_games/rope-girl",
+      "title": "切绳救小姐姐",
+      "pitch": "剪断绳子的顺序对了，小姐姐才落到坏人头上。",
+      "genre": "解谜",
+      "screen": "portrait",
+      "status": "beta",
+      "collection": "ad_games",
+      "accent": "#ff5c8a",
+      "dir": "../ad-games/games/rope-girl",
+      "build": "npm run build:web",
+      "out": "dist-web",
+      "licenseFiles": [
+        "../../kit/fonts-src/OFL-SmileySans.txt"
+      ]
+    },
+    {
+      "slug": "ad_games/bridge",
+      "title": "桥头守卫",
+      "pitch": "守在桥头换道开火，箱子、怪物、卡车，一个也别放过去。",
+      "genre": "射击",
+      "screen": "portrait",
+      "status": "beta",
+      "collection": "ad_games",
+      "accent": "#ff7a3d",
+      "dir": "../ad-games/games/bridge",
+      "build": "npm run build:web",
+      "out": "dist-web",
+      "licenseFiles": [
+        "../../kit/fonts-src/OFL-SmileySans.txt"
+      ]
+    },
+    {
+      "slug": "ad_games/glow-up-run",
+      "title": "长发大赛",
+      "pitch": "喝药水头发变长，躲开剪刀，换上衣服，让评委打高分。",
+      "genre": "休闲",
+      "screen": "portrait",
+      "status": "beta",
+      "collection": "ad_games",
+      "accent": "#ff4d8d",
+      "dir": "../ad-games/games/glow-up-run",
+      "build": "npm run build:web",
+      "out": "dist-web",
+      "licenseFiles": [
+        "../../kit/fonts-src/OFL-SmileySans.txt"
+      ]
+    },
+    {
+      "slug": "ad_games/tree-chop",
+      "title": "砍树修仙",
+      "pitch": "砍一刀掉一件装备，换上更强的，从练气一路修到渡劫飞升。",
+      "genre": "休闲",
+      "screen": "portrait",
+      "status": "beta",
+      "collection": "ad_games",
+      "accent": "#e8573f",
+      "dir": "../ad-games/games/tree-chop",
+      "build": "npm run build:web",
+      "out": "dist-web",
+      "licenseFiles": [
+        "../../kit/fonts-src/OFL-SmileySans.txt"
+      ]
+    },
+    {
+      "slug": "ad_games/card-sort",
+      "title": "分门别类",
+      "pitch": "像接龙一样挪牌，把同一类的词收进同一个盒子。",
+      "genre": "解谜",
+      "screen": "portrait",
+      "status": "beta",
+      "collection": "ad_games",
+      "accent": "#3f8f6b",
+      "dir": "../ad-games/games/card-sort",
+      "build": "npm run build:web",
+      "out": "dist-web",
+      "licenseFiles": [
+        "../../kit/fonts-src/OFL-SmileySans.txt"
+      ]
+    },
+    {
+      "slug": "ad_games/screw-pins",
+      "title": "拧螺丝",
+      "pitch": "一根根拧下没被压住的螺丝，按颜色装进盒子，托盘别装满。",
+      "genre": "解谜",
+      "screen": "portrait",
+      "status": "beta",
+      "collection": "ad_games",
+      "accent": "#ff8c2e",
+      "dir": "../ad-games/games/screw-pins",
+      "build": "npm run build:web",
+      "out": "dist-web",
+      "licenseFiles": [
+        "../../kit/fonts-src/OFL-SmileySans.txt"
+      ]
+    },
+    {
+      "slug": "ad_games/chop-stack",
+      "title": "伐木堆叠",
+      "pitch": "砍树把木头背在身上，一路堆到冰雪要塞盖起来。",
+      "genre": "休闲",
+      "screen": "portrait",
+      "status": "beta",
+      "collection": "ad_games",
+      "accent": "#e8573f",
+      "dir": "../ad-games/games/chop-stack",
+      "build": "npm run build:web",
+      "out": "dist-web",
+      "licenseFiles": [
+        "../../kit/fonts-src/OFL-SmileySans.txt"
+      ]
+    },
+    {
+      "slug": "ad_games/shorts-rescue",
+      "title": "拯救花裤衩",
+      "pitch": "他站在销子上、吊在绳上，下面是岩浆和鳄鱼：先拔哪个、先剪哪根？",
+      "genre": "解谜",
+      "screen": "portrait",
+      "status": "beta",
+      "collection": "ad_games",
+      "accent": "#ff5c8a",
+      "dir": "../ad-games/games/shorts-rescue",
+      "build": "npm run build:web",
+      "out": "dist-web",
+      "licenseFiles": [
+        "../../kit/fonts-src/OFL-SmileySans.txt"
+      ]
+    },
+    {
+      "slug": "ad_games/bead-art",
+      "title": "豆豆拼画",
+      "pitch": "把拼好的豆块按颜色摆进图案，摆满了用熨斗一熨。",
+      "genre": "休闲",
+      "screen": "portrait",
+      "status": "beta",
+      "collection": "ad_games",
+      "accent": "#ff8fb1",
+      "dir": "../ad-games/games/bead-art",
+      "build": "npm run build:web",
+      "out": "dist-web",
+      "licenseFiles": [
+        "../../kit/fonts-src/OFL-SmileySans.txt"
+      ]
     }
   ]
 }

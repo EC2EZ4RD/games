@@ -4,7 +4,7 @@
 //
 //   node scripts/build.mjs  (site/ must hold the games), then: node scripts/covers.mjs [slug ...]
 import { spawn } from 'node:child_process';
-import { mkdirSync, readFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { launchChrome } from './browser.mjs';
@@ -27,7 +27,10 @@ const DEVICE = {
 };
 
 for (const g of manifest.games) {
-  if (only.length && !only.includes(g.slug)) continue;
+  // `ad_games` (a collection's slug) takes every game in it
+  if (only.length && !only.includes(g.slug) && !only.includes(g.collection)) continue;
+  if (!existsSync(join(HUB, 'site', g.slug, 'index.html'))) { console.log(`skip ${g.slug}: not built`); continue; }
+  mkdirSync(dirname(join(OUT, `${g.slug}.jpg`)), { recursive: true });
   const context = await browser.newContext(DEVICE[g.screen]);
   const page = await context.newPage();
   page.on('pageerror', (e) => console.error(`[${g.slug}] ${e.message}`));

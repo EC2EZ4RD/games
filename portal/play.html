@@ -85,6 +85,12 @@
       // on a phone or a narrow window the game takes the whole page
       if (matchMedia('(pointer: coarse)').matches || innerWidth < 760) { location.replace(direct); return; }
       document.title = g.title + ' · ' + site.title;
+      // a game in a collection goes back to the collection's page
+      if (g.collection) {
+        const back = document.querySelector('.back');
+        back.href = './' + g.collection + '/';
+        back.lastChild.textContent = '回合集';
+      }
       document.body.style.setProperty('--accent', g.accent);
       const name = document.getElementById('name');
       name.textContent = g.title;
