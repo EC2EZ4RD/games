@@ -28,22 +28,27 @@ execFileSync('git', ['-c', 'core.autocrlf=false', '-c', 'core.safecrlf=false', `
 const tree = execFileSync('git', [`--git-dir=${join(HUB, '.git')}`, 'write-tree'], { cwd: SITE, env, encoding: 'utf8' }).trim();
 rmSync(index, { force: true });
 
-let parent = '';
-try { git(['fetch', '--quiet', 'origin', BRANCH]); } catch { /* no remote branch yet */ }
-for (const ref of [`refs/remotes/origin/${BRANCH}`, `refs/heads/${BRANCH}`]) {
-  try { parent = git(['rev-parse', '--verify', '--quiet', ref]); if (parent) break; } catch { /* not there */ }
-}
-if (parent && git(['rev-parse', `${parent}^{tree}`]) === tree) {
+const tip = (ref) => { try { return git(['rev-parse', '--verify', '--quiet', ref]); } catch { return ''; } };
+const isAncestor = (a, b) => { try { git(['merge-base', '--is-ancestor', a, b]); return true; } catch { return false; } };
+try { git(['fetch', '--quiet', 'origin', `${BRANCH}:refs/remotes/origin/${BRANCH}`]); } catch { /* no remote branch yet */ }
+const remote = tip(`refs/remotes/origin/${BRANCH}`);
+const local = tip(`refs/heads/${BRANCH}`);
+const site = JSON.parse(readFileSync(join(SITE, 'games.json'), 'utf8'));
+let commit;
+if (remote && git(['rev-parse', `${remote}^{tree}`]) === tree) {
   console.log('site/ is exactly what is published already: nothing to do.');
   process.exit(0);
+} else if (local && git(['rev-parse', `${local}^{tree}`]) === tree && (!remote || isAncestor(remote, local))) {
+  commit = local; // made before (a --dry-run), not pushed yet
+  console.log(`${BRANCH} already has this site locally (${commit.slice(0, 7)}), not yet on GitHub`);
+} else {
+  const parent = remote || local;
+  const stamp = new Date().toISOString().slice(0, 16).replace('T', ' ');
+  const message = `Publish ${stamp} UTC\n\n${site.games.map((g) => `- ${g.slug}`).join('\n')}\n`;
+  commit = git(['commit-tree', tree, ...(parent ? ['-p', parent] : []), '-m', message]);
+  git(['update-ref', `refs/heads/${BRANCH}`, commit]);
+  console.log(`${BRANCH} -> ${commit.slice(0, 7)} (${site.games.length} games)`);
 }
-
-const site = JSON.parse(readFileSync(join(SITE, 'games.json'), 'utf8'));
-const stamp = new Date().toISOString().slice(0, 16).replace('T', ' ');
-const message = `Publish ${stamp} UTC\n\n${site.games.map((g) => `- ${g.slug}`).join('\n')}\n`;
-const commit = git(['commit-tree', tree, ...(parent ? ['-p', parent] : []), '-m', message]);
-git(['update-ref', `refs/heads/${BRANCH}`, commit]);
-console.log(`${BRANCH} -> ${commit.slice(0, 7)} (${site.games.length} games)`);
 if (dry) {
   console.log('--dry-run: not pushed.');
 } else {
