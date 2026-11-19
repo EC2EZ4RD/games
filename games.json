@@ -594,6 +594,54 @@
       "licenseFiles": [
         "../../kit/fonts-src/OFL-SmileySans.txt"
       ]
+    },
+    {
+      "slug": "ad_games/word-td",
+      "title": "文字塔防",
+      "pitch": "在路边摆字，两个一样的叠成新字：人从众、木林森，一字一种打法。",
+      "genre": "策略",
+      "screen": "portrait",
+      "status": "beta",
+      "collection": "ad_games",
+      "accent": "#ff8a3a",
+      "dir": "../ad-games/games/word-td",
+      "build": "npm run build:web",
+      "out": "dist-web",
+      "licenseFiles": [
+        "../../kit/fonts-src/OFL-SmileySans.txt"
+      ]
+    },
+    {
+      "slug": "ad_games/snipe-alien",
+      "title": "狙击外星人",
+      "pitch": "外星人摆成雕像的样子混在街上：拿狙击镜找出它，再轮到你藏。",
+      "genre": "动作",
+      "screen": "portrait",
+      "status": "beta",
+      "collection": "ad_games",
+      "accent": "#3f7fd6",
+      "dir": "../ad-games/games/snipe-alien",
+      "build": "npm run build:web",
+      "out": "dist-web",
+      "licenseFiles": [
+        "../../kit/fonts-src/OFL-SmileySans.txt"
+      ]
+    },
+    {
+      "slug": "ad_games/find-aliens",
+      "title": "找找外星人",
+      "pitch": "外星人装成电视、沙发、台灯藏在屋里：拿瞄准镜一件件找出来。",
+      "genre": "解谜",
+      "screen": "portrait",
+      "status": "beta",
+      "collection": "ad_games",
+      "accent": "#3f7fd6",
+      "dir": "../ad-games/games/find-aliens",
+      "build": "npm run build:web",
+      "out": "dist-web",
+      "licenseFiles": [
+        "../../kit/fonts-src/OFL-SmileySans.txt"
+      ]
     }
   ]
 }
