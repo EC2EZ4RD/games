@@ -37,7 +37,8 @@ async function visit(name, url, view) {
   const problems = [];
   const outside = new Set();
   page.on('pageerror', (e) => problems.push(`pageerror: ${e.message.split('\n')[0]}`));
-  page.on('console', (m) => { if (m.type() === 'error') problems.push(`console: ${m.text().slice(0, 160)}`); });
+  // (Chrome asks the server root for /favicon.ico when a page names no icon: not the game's file)
+  page.on('console', (m) => { if (m.type() === 'error' && !m.location().url?.endsWith('/favicon.ico')) problems.push(`console: ${m.text().slice(0, 160)}`); });
   page.on('requestfailed', (r) => { if (!r.url().startsWith('data:')) problems.push(`failed: ${r.url()} ${r.failure()?.errorText ?? ''}`); });
   page.on('response', (r) => { if (r.status() >= 400) problems.push(`${r.status()}: ${r.url()}`); });
   page.on('request', (r) => { const u = new URL(r.url()); if (u.protocol.startsWith('http') && u.host !== `localhost:${PORT}`) outside.add(u.host); });
@@ -61,7 +62,7 @@ if (!only.length || only.includes('hub')) {
   for (const view of ['phone-portrait', 'desktop']) results.push(await visit('hub', BASE, view));
 }
 for (const g of site.games) {
-  if (!g.built || (only.length && !only.includes(g.slug))) continue;
+  if (only.length && !only.includes(g.slug)) continue; // site/games.json lists only built games
   const phone = g.screen === 'landscape' ? 'phone-landscape' : 'phone-portrait';
   const list = g.screen === 'desktop' ? ['desktop'] : [...(views.includes('phone') ? [phone] : []), ...(views.includes('desktop') ? ['desktop'] : [])];
   for (const view of list) results.push(await visit(g.slug, `${BASE}${g.slug}/`, view));
