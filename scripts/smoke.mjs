@@ -3,6 +3,7 @@
 // request leaving the site (TapTap, TapDB or anything else). Screenshots go to .shots/.
 //
 //   node scripts/smoke.mjs [slug ...]         SECS=8 waits longer per game; VIEWS=phone,desktop
+//   LIVE=https://ec2ez4rd.github.io/games/ node scripts/smoke.mjs     the published site instead of site/
 //
 // Views: a portrait game is opened as a phone held upright (390x844) and on a desktop (1440x900),
 // a landscape game as a phone on its side (844x390) and on a desktop, a desktop game on a desktop.
@@ -16,13 +17,14 @@ const HUB = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = join(HUB, '.shots');
 mkdirSync(OUT, { recursive: true });
 const PORT = 5401;
-const BASE = `http://localhost:${PORT}/games/`;
+const BASE = process.env.LIVE ?? `http://localhost:${PORT}/games/`;
+const HOST = new URL(BASE).host;
 const SECS = Number(process.env.SECS ?? 6);
 const only = process.argv.slice(2);
 const views = (process.env.VIEWS ?? 'phone,desktop').split(',');
 
-const server = spawn(process.execPath, [join(HUB, 'scripts', 'serve.mjs'), String(PORT)], { stdio: ['ignore', 'pipe', 'inherit'] });
-await new Promise((ok) => server.stdout.once('data', ok));
+const server = process.env.LIVE ? null : spawn(process.execPath, [join(HUB, 'scripts', 'serve.mjs'), String(PORT)], { stdio: ['ignore', 'pipe', 'inherit'] });
+if (server) await new Promise((ok) => server.stdout.once('data', ok));
 const browser = await launchChrome();
 const IPHONE_UA = 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Mobile/15E148 Safari/604.1';
 const VIEW = {
@@ -41,7 +43,7 @@ async function visit(name, url, view) {
   page.on('console', (m) => { if (m.type() === 'error' && !m.location().url?.endsWith('/favicon.ico')) problems.push(`console: ${m.text().slice(0, 160)}`); });
   page.on('requestfailed', (r) => { if (!r.url().startsWith('data:')) problems.push(`failed: ${r.url()} ${r.failure()?.errorText ?? ''}`); });
   page.on('response', (r) => { if (r.status() >= 400) problems.push(`${r.status()}: ${r.url()}`); });
-  page.on('request', (r) => { const u = new URL(r.url()); if (u.protocol.startsWith('http') && u.host !== `localhost:${PORT}`) outside.add(u.host); });
+  page.on('request', (r) => { const u = new URL(r.url()); if (u.protocol.startsWith('http') && u.host !== HOST) outside.add(u.host); });
   const t0 = Date.now();
   try {
     await page.goto(url, { waitUntil: 'load', timeout: 60000 });
@@ -68,7 +70,7 @@ for (const g of site.games) {
   for (const view of list) results.push(await visit(g.slug, `${BASE}${g.slug}/`, view));
 }
 await browser.close();
-server.kill();
+server?.kill();
 
 writeFileSync(join(OUT, 'smoke.json'), JSON.stringify(results, null, 2));
 for (const r of results) {
