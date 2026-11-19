@@ -8,7 +8,7 @@
       "title": "真·广告游戏",
       "pitch": "那些点进去却不是它的小游戏广告，一款款做成了真的。",
       "accent": "#ff5c8a",
-      "count": 29
+      "count": 32
     }
   ],
   "games": [
@@ -424,6 +424,39 @@
       "accent": "#ff8fb1",
       "collection": "ad_games",
       "tagsHtml": "<li><svg class=\"i\" aria-hidden=\"true\"><use href=\"#i-portrait\"/></svg>竖屏</li><li><svg class=\"i\" aria-hidden=\"true\"><use href=\"#g-休闲\"/></svg>休闲</li>"
+    },
+    {
+      "slug": "ad_games/word-td",
+      "title": "文字塔防",
+      "pitch": "在路边摆字，两个一样的叠成新字：人从众、木林森，一字一种打法。",
+      "genre": "策略",
+      "screen": "portrait",
+      "status": "beta",
+      "accent": "#ff8a3a",
+      "collection": "ad_games",
+      "tagsHtml": "<li><svg class=\"i\" aria-hidden=\"true\"><use href=\"#i-portrait\"/></svg>竖屏</li><li><svg class=\"i\" aria-hidden=\"true\"><use href=\"#g-策略\"/></svg>策略</li>"
+    },
+    {
+      "slug": "ad_games/snipe-alien",
+      "title": "狙击外星人",
+      "pitch": "外星人摆成雕像的样子混在街上：拿狙击镜找出它，再轮到你藏。",
+      "genre": "动作",
+      "screen": "portrait",
+      "status": "beta",
+      "accent": "#3f7fd6",
+      "collection": "ad_games",
+      "tagsHtml": "<li><svg class=\"i\" aria-hidden=\"true\"><use href=\"#i-portrait\"/></svg>竖屏</li><li><svg class=\"i\" aria-hidden=\"true\"><use href=\"#g-动作\"/></svg>动作</li>"
+    },
+    {
+      "slug": "ad_games/find-aliens",
+      "title": "找找外星人",
+      "pitch": "外星人装成电视、沙发、台灯藏在屋里：拿瞄准镜一件件找出来。",
+      "genre": "解谜",
+      "screen": "portrait",
+      "status": "beta",
+      "accent": "#3f7fd6",
+      "collection": "ad_games",
+      "tagsHtml": "<li><svg class=\"i\" aria-hidden=\"true\"><use href=\"#i-portrait\"/></svg>竖屏</li><li><svg class=\"i\" aria-hidden=\"true\"><use href=\"#g-解谜\"/></svg>解谜</li>"
     }
   ]
 }
