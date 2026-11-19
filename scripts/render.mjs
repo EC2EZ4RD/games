@@ -17,7 +17,7 @@ const lin = (c) => { c /= 255; return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 
 const lum = (hex) => { const n = parseInt(hex.slice(1), 16); return 0.2126 * lin(n >> 16) + 0.7152 * lin((n >> 8) & 255) + 0.0722 * lin(n & 255); };
 const contrast = (a, b) => { const [x, y] = [lum(a), lum(b)].sort((p, q) => q - p); return (x + 0.05) / (y + 0.05); };
 const INK = '#221f2e';
-const onAccent = (accent) => (contrast(accent, '#ffffff') >= contrast(accent, INK) ? '#ffffff' : INK);
+export const onAccent = (accent) => (contrast(accent, '#ffffff') >= contrast(accent, INK) ? '#ffffff' : INK);
 
 export function tagsHtml(g) {
   const [si, sl] = SCREEN[g.screen];

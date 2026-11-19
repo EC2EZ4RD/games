@@ -45,6 +45,7 @@ createServer((req, res) => {
     res.writeHead(404).end('not found');
     return;
   }
-  res.writeHead(200, { 'content-type': TYPES[extname(file).toLowerCase()] ?? 'application/octet-stream', 'cache-control': 'no-cache' });
+  // GitHub Pages sends max-age=600; the same here, so loading behaves as it will online
+  res.writeHead(200, { 'content-type': TYPES[extname(file).toLowerCase()] ?? 'application/octet-stream', 'cache-control': 'max-age=600', 'content-length': statSync(file).size });
   createReadStream(file).pipe(res);
 }).listen(PORT, () => console.log(`site/ on http://localhost:${PORT}${BASE}`));

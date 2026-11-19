@@ -51,6 +51,7 @@ async function visit(name, url, view) {
     problems.push(`goto: ${e.message.split('\n')[0]}`);
   }
   await page.waitForTimeout(SECS * 1000);
+  if (await page.evaluate(() => !!document.getElementById('hub-ld')).catch(() => false)) problems.push(`the loading screen is still up after ${SECS} s`);
   const file = join(OUT, `${name}-${view}.png`);
   await page.screenshot({ path: file }).catch((e) => problems.push(`screenshot: ${e.message}`));
   const title = await page.title().catch(() => '');

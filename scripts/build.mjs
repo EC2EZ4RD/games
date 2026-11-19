@@ -14,7 +14,8 @@ import { execSync } from 'node:child_process';
 import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { renderHub } from './render.mjs';
+import { injectLoader, LOADER_TEXT } from './loader.mjs';
+import { onAccent, renderHub } from './render.mjs';
 
 const HUB = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const SITE = join(HUB, 'site');
@@ -57,8 +58,14 @@ for (const g of games) {
 const TEMPLATES = ['index.html', 'play.html', 'icons.svg'];
 cpSync(join(HUB, 'portal'), SITE, { recursive: true, filter: (src) => !TEMPLATES.some((t) => src === join(HUB, 'portal', t)) });
 if (existsSync(join(HUB, 'covers'))) cpSync(join(HUB, 'covers'), join(SITE, 'covers'), { recursive: true });
-const { games: shown, text } = await renderHub({ hub: HUB, site: SITE, manifest });
+const { games: shown, text: hubText } = await renderHub({ hub: HUB, site: SITE, manifest });
 writeFileSync(join(SITE, 'licenses.txt'), licenses(shown));
+// every game page gets the hub's loading screen (again, if it already had one)
+for (const g of shown) {
+  const bytes = injectLoader({ site: SITE, game: g, onAccent: onAccent(g.accent) });
+  console.log(`loading screen: ${g.slug} waits for ${(bytes / 1048576).toFixed(1)} MB`);
+}
+const text = hubText + LOADER_TEXT;
 // GitHub Pages: serve the files as they are (no Jekyll)
 writeFileSync(join(SITE, '.nojekyll'), '');
 

@@ -35,6 +35,11 @@ node scripts/publish.mjs         # 检查通过后把 site/ 提交到 gh-pages �
 
 其他：
 
+- 加载画面：构建时给每个游戏页面加一层加载画面（`scripts/loader.mjs`），页面一到就显示游戏名和进度条，
+  进度是游戏除音乐外所有文件的真实下载量，游戏代码跑起来、画出头两帧后淡出。游戏照常同时启动，不会被它拖慢，
+  文件也不会下两遍。游戏源码和 TapTap 包都不受影响。
+- `node scripts/slowload.mjs <slug> [kbps] [延迟ms]`：在限速网络下空缓存打开一个游戏，记录加载画面多久出现、
+  进度怎么走、多久消失、有没有文件下了两次（`LIVE=<网址>` 测线上，`VIEW=desktop` 用电脑尺寸）。
 - `node scripts/covers.mjs [slug]`：重新截封面（`covers/<slug>.jpg`，用游戏自己的网页版截开局画面）。
 - 大厅的标题字体是裁剪过的得意黑，只含用到的字。`games.json` 里加了新字，构建会提示，这时先跑
   `node scripts/build.mjs --hub-only`，再跑 `python scripts/fonts.py`（需要 fontTools 和 brotli）。
