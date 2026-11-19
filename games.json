@@ -128,8 +128,8 @@
       "dir": "../jiangzaiwai",
       "build": "npx tsc --noEmit && npx vite build --base ./ --outDir {stage} --emptyOutDir",
       "out": "{stage}",
-      "coverQuery": "?army=spear:zhang,archer:chen,rider:hu,militia:meng&foe=sword,hammer,rider,archer",
-      "coverWait": 14
+      "coverQuery": "?army=spear:zhangfei,sword:simayi,hammer:dengai,archer:mulan,rider:zhaoyun&foe=sword,hammer,rider,archer,spear&famous=1",
+      "coverWait": 20
     },
     {
       "slug": "ad_games/gate-shooter",
