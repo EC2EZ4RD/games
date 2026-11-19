@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>有限进步 · 小游戏合集</title>
+  <meta name="description" content="有限进步：9 款打开网页就能玩的小游戏，手机和电脑都能玩。喵星计划、升维、撒豆成兵、筑城、哈基米拆家、液体猫、别笑，你也防不了第二拳、泼墨大乱斗、将在外" />
+  <meta property="og:title" content="有限进步 · 小游戏合集" />
+  <meta property="og:description" content="9 款打开网页就能玩的小游戏：喵星计划、升维、撒豆成兵、筑城、哈基米拆家、液体猫、别笑，你也防不了第二拳、泼墨大乱斗、将在外" />
+  <meta name="theme-color" content="#f3ede2" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#16141c" media="(prefers-color-scheme: dark)" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="preload" href="fonts/hub-display.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="hub.css" />
+</head>
+<body>
+  <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <defs>
+    <!-- 24x24, stroked with currentColor unless filled; drawn for this hub -->
+    <symbol id="i-portrait" viewBox="0 0 24 24"><rect x="7" y="2.5" width="10" height="19" rx="2.2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10.5 18.2h3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-landscape" viewBox="0 0 24 24"><rect x="2.5" y="7" width="19" height="10" rx="2.2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M18.2 10.5v3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-desktop" viewBox="0 0 24 24"><rect x="2.5" y="4" width="19" height="12.5" rx="1.6" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 16.5v4M8 20.5h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 4.8v14.4a.8.8 0 0 0 1.2.7l11.3-7.2a.8.8 0 0 0 0-1.4L9.2 4.1A.8.8 0 0 0 8 4.8z" fill="currentColor"/></symbol>
+    <symbol id="i-live" viewBox="0 0 24 24"><path d="M4.5 12.8l4.7 4.7L19.8 6.8" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-beta" viewBox="0 0 24 24"><path d="M9 2.8h6M10.2 2.8v6.4L4.9 18.1a2 2 0 0 0 1.7 3.1h10.8a2 2 0 0 0 1.7-3.1l-5.3-8.9V2.8" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M7.4 15.2h9.2" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
+    <symbol id="i-wip" viewBox="0 0 24 24"><path d="M4.5 19.5l8.3-8.3" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/><path d="M11.6 6.4l3.3-3.3 6 6-3.3 3.3z" fill="currentColor" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+    <symbol id="i-ext" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-8.5 8.5M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-qr" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></g><path d="M14 14h3v3h-3zM18 18h3v3h-3zM18 14h3v2h-3zM14 19h2v2h-2z" fill="currentColor"/></symbol>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="M3.5 11.2L12 3.8l8.5 7.4M6 9.4V20h4.5v-5.5h3V20H18V9.4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-expand" viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15.5" r="4.2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M11 12.5l9-9M16.6 6.9l2.4 2.4M14.2 9.3l2 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-save" viewBox="0 0 24 24"><path d="M5 3.5h11l3.5 3.5v12.5a1 1 0 0 1-1 1h-13a1 1 0 0 1-1-1V4.5a1 1 0 0 1 1-1z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M8 3.5v5h7v-5M8 20.5v-6h8v6" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+    <symbol id="i-mouse" viewBox="0 0 24 24"><rect x="6.5" y="3" width="11" height="18" rx="5.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 7v3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-code" viewBox="0 0 24 24"><path d="M8.5 7L3.5 12l5 5M15.5 7l5 5-5 5M13.5 4.5l-3 15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <!-- genres -->
+    <symbol id="g-策略" viewBox="0 0 24 24"><path d="M6 21V3.5M6 4.5h11.5L15 8.7l2.5 4.3H6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="g-解谜" viewBox="0 0 24 24"><path d="M12 2.8l8 4.6v9.2l-8 4.6-8-4.6V7.4zM12 12l8-4.6M12 12v9.2M12 12L4 7.4" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+    <symbol id="g-休闲" viewBox="0 0 24 24"><path d="M4.5 9.5L5.8 3.6l4.4 3.3h3.6l4.4-3.3 1.3 5.9V13a7.5 7.5 0 0 1-15 0z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M9.3 12.4v.6M14.7 12.4v.6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></symbol>
+    <symbol id="g-合成" viewBox="0 0 24 24"><path d="M8.5 3.5C5.4 7.6 4 10.2 4 12.4a4.5 4.5 0 0 0 9 0c0-2.2-1.4-4.8-4.5-8.9z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M16.8 9.5c-2.4 2.9-3.3 4.7-3.3 6.2a3.3 3.3 0 0 0 6.6 0c0-1.5-.9-3.3-3.3-6.2z" fill="currentColor"/></symbol>
+    <symbol id="g-动作" viewBox="0 0 24 24"><path d="M13.5 2.5L5 13.5h6.2L10.2 21.5l8.8-11.6h-6.3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+    <symbol id="g-射击" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 2v5M12 17v5M2 12h5M17 12h5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="g-战棋" viewBox="0 0 24 24"><path d="M4.5 19.5L19 5M15 4.5h4.5V9M19.5 19.5L5 5M4.5 9V4.5H9M7.5 16.5l-3 3M16.5 16.5l3 3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  </defs>
+</svg>
+  <header class="top">
+    <div class="brand">
+      <svg class="brand-mark" viewBox="0 0 84 46" aria-hidden="true">
+        <rect class="track" x="3" y="17" width="78" height="25" rx="8.5" stroke-width="3.5"/>
+        <rect x="8.5" y="22.5" width="44" height="14" rx="4" fill="#ff5c8a"/>
+        <path d="M52.5 23V4" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/>
+        <path d="M54 5h14.5l-4.2 5.2 4.2 5.2H54z" fill="#f2b632" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
+      </svg>
+      <div>
+        <h1>有限进步</h1>
+        <p>打开网页就能玩的小游戏 <span class="count">9 款</span></p>
+      </div>
+    </div>
+    <div class="hub-qr">
+      <div><b>手机扫一扫</b>在手机上打开这里</div>
+      <img src="qr/hub.svg" alt="本页的二维码" width="84" height="84" />
+    </div>
+  </header>
+
+  <main class="grid">
+    <article class="card" data-slug="meow-planet" data-screen="portrait" style="--accent:#ff6f91;--on-accent:#221f2e">
+      <a class="stage" href="./meow-planet/" data-go tabindex="-1" aria-hidden="true">
+        <span class="device portrait"><img src="covers/meow-planet.jpg" alt="喵星计划 的游戏画面" width="585" height="1266" loading="eager" decoding="async" /></span>
+      </a>
+      <span class="status live"><svg class="i" aria-hidden="true"><use href="#i-live"/></svg>已上线</span>
+      <div class="info">
+        <h2>喵星计划</h2>
+        <p class="pitch">喂猫、点技能，让猫咪占领整颗星球，赶在狗狗做出疫苗之前。</p>
+        <ul class="tags"><li><svg class="i" aria-hidden="true"><use href="#i-portrait"/></svg>竖屏</li><li><svg class="i" aria-hidden="true"><use href="#g-策略"/></svg>策略</li></ul>
+        
+        <div class="acts">
+          <a class="play" href="./meow-planet/" data-go><svg class="i" aria-hidden="true"><use href="#i-play"/></svg>开玩</a>
+          <a class="side" href="https://www.taptap.cn/app/995497" target="_blank" rel="noopener" title="喵星计划 在 TapTap"><svg class="i" aria-hidden="true"><use href="#i-ext"/></svg>TapTap</a><button class="side qr-btn" type="button" aria-label="喵星计划 的二维码"><svg class="i" aria-hidden="true"><use href="#i-qr"/></svg></button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-slug="shengwei" data-screen="portrait" style="--accent:#4f7cff;--on-accent:#221f2e">
+      <a class="stage" href="./shengwei/" data-go tabindex="-1" aria-hidden="true">
+        <span class="device portrait"><img src="covers/shengwei.jpg" alt="升维 的游戏画面" width="585" height="1266" loading="eager" decoding="async" /></span>
+      </a>
+      <span class="status live"><svg class="i" aria-hidden="true"><use href="#i-live"/></svg>已上线</span>
+      <div class="info">
+        <h2>升维</h2>
+        <p class="pitch">你只看得见世界的一个切面。转动切面，走出 204 关。</p>
+        <ul class="tags"><li><svg class="i" aria-hidden="true"><use href="#i-portrait"/></svg>竖屏</li><li><svg class="i" aria-hidden="true"><use href="#g-解谜"/></svg>解谜</li></ul>
+        
+        <div class="acts">
+          <a class="play" href="./shengwei/" data-go><svg class="i" aria-hidden="true"><use href="#i-play"/></svg>开玩</a>
+          <a class="side" href="https://www.taptap.cn/app/1037224" target="_blank" rel="noopener" title="升维 在 TapTap"><svg class="i" aria-hidden="true"><use href="#i-ext"/></svg>TapTap</a><button class="side qr-btn" type="button" aria-label="升维 的二维码"><svg class="i" aria-hidden="true"><use href="#i-qr"/></svg></button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-slug="sadou" data-screen="portrait" style="--accent:#e8a33d;--on-accent:#221f2e">
+      <a class="stage" href="./sadou/" data-go tabindex="-1" aria-hidden="true">
+        <span class="device portrait"><img src="covers/sadou.jpg" alt="撒豆成兵 的游戏画面" width="585" height="1266" loading="eager" decoding="async" /></span>
+      </a>
+      <span class="status live"><svg class="i" aria-hidden="true"><use href="#i-live"/></svg>已上线</span>
+      <div class="info">
+        <h2>撒豆成兵</h2>
+        <p class="pitch">排兵布阵，从一把黄豆打到百万豆兵。</p>
+        <ul class="tags"><li><svg class="i" aria-hidden="true"><use href="#i-portrait"/></svg>竖屏</li><li><svg class="i" aria-hidden="true"><use href="#g-策略"/></svg>策略</li></ul>
+        
+        <div class="acts">
+          <a class="play" href="./sadou/" data-go><svg class="i" aria-hidden="true"><use href="#i-play"/></svg>开玩</a>
+          <a class="side" href="https://www.taptap.cn/app/1007140" target="_blank" rel="noopener" title="撒豆成兵 在 TapTap"><svg class="i" aria-hidden="true"><use href="#i-ext"/></svg>TapTap</a><button class="side qr-btn" type="button" aria-label="撒豆成兵 的二维码"><svg class="i" aria-hidden="true"><use href="#i-qr"/></svg></button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-slug="zhucheng" data-screen="landscape" style="--accent:#6a9e4f;--on-accent:#221f2e">
+      <a class="stage" href="./zhucheng/" data-go tabindex="-1" aria-hidden="true">
+        <span class="device landscape"><img src="covers/zhucheng.jpg" alt="筑城 的游戏画面" width="1266" height="585" loading="lazy" decoding="async" /></span>
+      </a>
+      <span class="status beta"><svg class="i" aria-hidden="true"><use href="#i-beta"/></svg>试玩版</span>
+      <div class="info">
+        <h2>筑城</h2>
+        <p class="pitch">经营庄园，出城搜刮，带兵打仗再撤回来。</p>
+        <ul class="tags"><li><svg class="i" aria-hidden="true"><use href="#i-landscape"/></svg>横屏</li><li><svg class="i" aria-hidden="true"><use href="#g-策略"/></svg>策略</li></ul>
+        
+        <div class="acts">
+          <a class="play" href="./zhucheng/" data-go><svg class="i" aria-hidden="true"><use href="#i-play"/></svg>开玩</a>
+          <button class="side qr-btn" type="button" aria-label="筑城 的二维码"><svg class="i" aria-hidden="true"><use href="#i-qr"/></svg></button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-slug="hachimi" data-screen="portrait" style="--accent:#f08a4b;--on-accent:#221f2e">
+      <a class="stage" href="./hachimi/" data-go tabindex="-1" aria-hidden="true">
+        <span class="device portrait"><img src="covers/hachimi.jpg" alt="哈基米拆家 的游戏画面" width="585" height="1266" loading="lazy" decoding="async" /></span>
+      </a>
+      <span class="status beta"><svg class="i" aria-hidden="true"><use href="#i-beta"/></svg>试玩版</span>
+      <div class="info">
+        <h2>哈基米拆家</h2>
+        <p class="pitch">当一只猫，趁主人不注意把家拆个底朝天。</p>
+        <ul class="tags"><li><svg class="i" aria-hidden="true"><use href="#i-portrait"/></svg>竖屏</li><li><svg class="i" aria-hidden="true"><use href="#g-休闲"/></svg>休闲</li></ul>
+        
+        <div class="acts">
+          <a class="play" href="./hachimi/" data-go><svg class="i" aria-hidden="true"><use href="#i-play"/></svg>开玩</a>
+          <button class="side qr-btn" type="button" aria-label="哈基米拆家 的二维码"><svg class="i" aria-hidden="true"><use href="#i-qr"/></svg></button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-slug="liquid-cat" data-screen="portrait" style="--accent:#5ec8b8;--on-accent:#221f2e">
+      <a class="stage" href="./liquid-cat/" data-go tabindex="-1" aria-hidden="true">
+        <span class="device portrait"><img src="covers/liquid-cat.jpg" alt="液体猫 的游戏画面" width="585" height="1266" loading="lazy" decoding="async" /></span>
+      </a>
+      <span class="status beta"><svg class="i" aria-hidden="true"><use href="#i-beta"/></svg>试玩版</span>
+      <div class="info">
+        <h2>液体猫</h2>
+        <p class="pitch">软乎乎的史莱姆猫，挤一挤、合一合，越滚越大。</p>
+        <ul class="tags"><li><svg class="i" aria-hidden="true"><use href="#i-portrait"/></svg>竖屏</li><li><svg class="i" aria-hidden="true"><use href="#g-合成"/></svg>合成</li></ul>
+        
+        <div class="acts">
+          <a class="play" href="./liquid-cat/" data-go><svg class="i" aria-hidden="true"><use href="#i-play"/></svg>开玩</a>
+          <button class="side qr-btn" type="button" aria-label="液体猫 的二维码"><svg class="i" aria-hidden="true"><use href="#i-qr"/></svg></button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-slug="punch" data-screen="portrait" style="--accent:#e2483d;--on-accent:#ffffff">
+      <a class="stage" href="./punch/" data-go tabindex="-1" aria-hidden="true">
+        <span class="device portrait"><img src="covers/punch.jpg" alt="别笑，你也防不了第二拳 的游戏画面" width="585" height="1266" loading="lazy" decoding="async" /></span>
+      </a>
+      <span class="status beta"><svg class="i" aria-hidden="true"><use href="#i-beta"/></svg>试玩版</span>
+      <div class="info">
+        <h2 class="long">别笑，你也防不了第二拳</h2>
+        <p class="pitch">看清来拳，躲开，再还手。踩着 phonk 的鼓点打五个对手。</p>
+        <ul class="tags"><li><svg class="i" aria-hidden="true"><use href="#i-portrait"/></svg>竖屏</li><li><svg class="i" aria-hidden="true"><use href="#g-动作"/></svg>动作</li></ul>
+        
+        <div class="acts">
+          <a class="play" href="./punch/" data-go><svg class="i" aria-hidden="true"><use href="#i-play"/></svg>开玩</a>
+          <button class="side qr-btn" type="button" aria-label="别笑，你也防不了第二拳 的二维码"><svg class="i" aria-hidden="true"><use href="#i-qr"/></svg></button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-slug="pomo" data-screen="landscape" style="--accent:#3f8f9b;--on-accent:#221f2e">
+      <a class="stage" href="./pomo/" data-go tabindex="-1" aria-hidden="true">
+        <span class="device landscape"><img src="covers/pomo.jpg" alt="泼墨大乱斗 的游戏画面" width="1266" height="585" loading="lazy" decoding="async" /></span>
+      </a>
+      <span class="status beta"><svg class="i" aria-hidden="true"><use href="#i-beta"/></svg>试玩版</span>
+      <div class="info">
+        <h2>泼墨大乱斗</h2>
+        <p class="pitch">四对四泼墨占地，在徽州的白墙黛瓦间抢地盘。</p>
+        <ul class="tags"><li><svg class="i" aria-hidden="true"><use href="#i-landscape"/></svg>横屏</li><li><svg class="i" aria-hidden="true"><use href="#g-射击"/></svg>射击</li></ul>
+        
+        <div class="acts">
+          <a class="play" href="./pomo/" data-go><svg class="i" aria-hidden="true"><use href="#i-play"/></svg>开玩</a>
+          <button class="side qr-btn" type="button" aria-label="泼墨大乱斗 的二维码"><svg class="i" aria-hidden="true"><use href="#i-qr"/></svg></button>
+        </div>
+      </div>
+    </article>
+    <article class="card" data-slug="jiangzaiwai" data-screen="desktop" style="--accent:#3c8c7a;--on-accent:#ffffff">
+      <a class="stage" href="./jiangzaiwai/" data-go tabindex="-1" aria-hidden="true">
+        <span class="device desktop"><img src="covers/jiangzaiwai.jpg" alt="将在外 的游戏画面" width="960" height="600" loading="lazy" decoding="async" /></span>
+      </a>
+      <span class="status wip"><svg class="i" aria-hidden="true"><use href="#i-wip"/></svg>开发中</span>
+      <div class="info">
+        <h2>将在外</h2>
+        <p class="pitch">用一句话给将领下令，可将在外，君命有所不受。</p>
+        <ul class="tags"><li><svg class="i" aria-hidden="true"><use href="#i-desktop"/></svg>电脑</li><li><svg class="i" aria-hidden="true"><use href="#g-战棋"/></svg>战棋</li></ul>
+        <p class="note"><svg class="i" aria-hidden="true"><use href="#i-key"/></svg><span>需要自备 AI Key（DeepSeek 等），在电脑上玩</span></p>
+        <div class="acts">
+          <a class="play" href="./jiangzaiwai/" data-go><svg class="i" aria-hidden="true"><use href="#i-play"/></svg>开玩</a>
+          
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <footer class="foot">
+    <span><svg class="i"><use href="#i-save"/></svg>存档只留在你这台设备的浏览器里，换设备或清缓存会重新开始</span>
+    <span><svg class="i"><use href="#i-code"/></svg>标题字体改自 atelierAnchor 的得意黑（SIL OFL 1.1）· <a href="licenses.txt">第三方许可</a></span>
+  </footer>
+  <script src="hub.js"></script>
+</body>
+</html>

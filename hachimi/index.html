@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+    <meta name="theme-color" content="#fff8e8" />
+    <title>哈基米拆家</title>
+    <script type="module" crossorigin src="./assets/index-nNC-0yJI.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-mHT9tl1n.css">
+  </head>
+  <body>
+    <canvas id="gl"></canvas>
+    <div id="touch"></div>
+    <div id="speed"></div>
+    <div id="bubbles"></div>
+
+    <div id="hud" class="hidden">
+      <button id="note" class="note" aria-label="捣蛋清单">
+        <i class="tape"></i>
+        <div class="note-head"><b>今日捣蛋清单</b><small id="note-count">0/9</small></div>
+        <ol id="note-list"></ol>
+        <span class="note-more" id="note-more">点开看全部</span>
+      </button>
+      <div class="clock" id="clock"><i class="sun" id="clock-sun"></i><b id="clock-time">08:00</b><small id="clock-day">第 1 天</small></div>
+      <button id="btn-pause" class="pause" aria-label="暂停"><i></i><i></i></button>
+      <div id="status" class="status hidden"></div>
+      <div id="task-toast" class="task-toast"></div>
+      <div id="code-toast" class="code-toast"></div>
+      <div class="act-wrap">
+        <button id="btn-haa" class="haa hidden">哈！</button>
+        <button id="btn-act" class="act"><b id="act-label">喵</b><small id="act-sub"></small></button>
+      </div>
+      <div id="stick" class="stick hidden"><i class="knob"></i></div>
+    </div>
+
+    <section id="title" class="screen title hidden">
+      <div class="logo">
+        <h1><span>哈基米</span><span>拆家</span></h1>
+        <p class="tagline">今天也要把家拆了</p>
+      </div>
+      <div class="title-buttons">
+        <button id="btn-start" class="btn primary big">开始拆家</button>
+        <div class="row">
+          <button id="btn-maps" class="btn">地图</button>
+          <button id="btn-skills" class="btn">代码库</button>
+          <button id="btn-closet" class="btn">衣柜</button>
+        </div>
+      </div>
+      <div class="title-foot">
+        <span id="title-stats"></span>
+        <button id="btn-sound" class="chip">音效：开</button>
+      </div>
+    </section>
+
+    <section id="maps" class="screen sheet hidden">
+      <header><button class="back" data-back>‹ 返回</button><h2>去哪儿拆？</h2><span class="fish-count"></span></header>
+      <div class="sheet-body" id="map-list"></div>
+    </section>
+
+    <section id="skills" class="screen sheet hidden">
+      <header><button class="back" data-back>‹ 返回</button><h2>底层代码库</h2><span class="fish-count"></span></header>
+      <p class="sheet-hint">猫的一切行为，都是写死的底层代码。</p>
+      <div class="sheet-body" id="skill-list"></div>
+    </section>
+
+    <section id="closet" class="screen sheet hidden">
+      <header><button class="back" data-back>‹ 返回</button><h2>衣柜</h2><span class="fish-count"></span></header>
+      <h3>猫猫</h3>
+      <div class="grid" id="skin-list"></div>
+      <h3>帽子</h3>
+      <div class="grid" id="hat-list"></div>
+    </section>
+
+    <section id="receipt" class="screen receipt-screen hidden">
+      <div class="receipt" id="receipt-paper"></div>
+      <div class="receipt-buttons" id="receipt-buttons"></div>
+    </section>
+
+    <div id="modal" class="hidden"><div class="modal-card"></div></div>
+    <div id="toast"></div>
+  </body>
+</html>

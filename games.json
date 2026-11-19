@@ -1,0 +1,101 @@
+{
+  "title": "有限进步",
+  "tagline": "打开网页就能玩的小游戏",
+  "url": "https://ec2ez4rd.github.io/games/",
+  "games": [
+    {
+      "slug": "meow-planet",
+      "title": "喵星计划",
+      "pitch": "喂猫、点技能，让猫咪占领整颗星球，赶在狗狗做出疫苗之前。",
+      "genre": "策略",
+      "screen": "portrait",
+      "status": "live",
+      "taptap": "https://www.taptap.cn/app/995497",
+      "accent": "#ff6f91",
+      "tagsHtml": "<li><svg class=\"i\" aria-hidden=\"true\"><use href=\"#i-portrait\"/></svg>竖屏</li><li><svg class=\"i\" aria-hidden=\"true\"><use href=\"#g-策略\"/></svg>策略</li>"
+    },
+    {
+      "slug": "shengwei",
+      "title": "升维",
+      "pitch": "你只看得见世界的一个切面。转动切面，走出 204 关。",
+      "genre": "解谜",
+      "screen": "portrait",
+      "status": "live",
+      "taptap": "https://www.taptap.cn/app/1037224",
+      "accent": "#4f7cff",
+      "tagsHtml": "<li><svg class=\"i\" aria-hidden=\"true\"><use href=\"#i-portrait\"/></svg>竖屏</li><li><svg class=\"i\" aria-hidden=\"true\"><use href=\"#g-解谜\"/></svg>解谜</li>"
+    },
+    {
+      "slug": "sadou",
+      "title": "撒豆成兵",
+      "pitch": "排兵布阵，从一把黄豆打到百万豆兵。",
+      "genre": "策略",
+      "screen": "portrait",
+      "status": "live",
+      "taptap": "https://www.taptap.cn/app/1007140",
+      "accent": "#e8a33d",
+      "tagsHtml": "<li><svg class=\"i\" aria-hidden=\"true\"><use href=\"#i-portrait\"/></svg>竖屏</li><li><svg class=\"i\" aria-hidden=\"true\"><use href=\"#g-策略\"/></svg>策略</li>"
+    },
+    {
+      "slug": "zhucheng",
+      "title": "筑城",
+      "pitch": "经营庄园，出城搜刮，带兵打仗再撤回来。",
+      "genre": "策略",
+      "screen": "landscape",
+      "status": "beta",
+      "accent": "#6a9e4f",
+      "tagsHtml": "<li><svg class=\"i\" aria-hidden=\"true\"><use href=\"#i-landscape\"/></svg>横屏</li><li><svg class=\"i\" aria-hidden=\"true\"><use href=\"#g-策略\"/></svg>策略</li>"
+    },
+    {
+      "slug": "hachimi",
+      "title": "哈基米拆家",
+      "pitch": "当一只猫，趁主人不注意把家拆个底朝天。",
+      "genre": "休闲",
+      "screen": "portrait",
+      "status": "beta",
+      "accent": "#f08a4b",
+      "tagsHtml": "<li><svg class=\"i\" aria-hidden=\"true\"><use href=\"#i-portrait\"/></svg>竖屏</li><li><svg class=\"i\" aria-hidden=\"true\"><use href=\"#g-休闲\"/></svg>休闲</li>"
+    },
+    {
+      "slug": "liquid-cat",
+      "title": "液体猫",
+      "pitch": "软乎乎的史莱姆猫，挤一挤、合一合，越滚越大。",
+      "genre": "合成",
+      "screen": "portrait",
+      "status": "beta",
+      "accent": "#5ec8b8",
+      "tagsHtml": "<li><svg class=\"i\" aria-hidden=\"true\"><use href=\"#i-portrait\"/></svg>竖屏</li><li><svg class=\"i\" aria-hidden=\"true\"><use href=\"#g-合成\"/></svg>合成</li>"
+    },
+    {
+      "slug": "punch",
+      "title": "别笑，你也防不了第二拳",
+      "pitch": "看清来拳，躲开，再还手。踩着 phonk 的鼓点打五个对手。",
+      "genre": "动作",
+      "screen": "portrait",
+      "status": "beta",
+      "accent": "#e2483d",
+      "tagsHtml": "<li><svg class=\"i\" aria-hidden=\"true\"><use href=\"#i-portrait\"/></svg>竖屏</li><li><svg class=\"i\" aria-hidden=\"true\"><use href=\"#g-动作\"/></svg>动作</li>"
+    },
+    {
+      "slug": "pomo",
+      "title": "泼墨大乱斗",
+      "pitch": "四对四泼墨占地，在徽州的白墙黛瓦间抢地盘。",
+      "genre": "射击",
+      "screen": "landscape",
+      "status": "beta",
+      "accent": "#3f8f9b",
+      "tagsHtml": "<li><svg class=\"i\" aria-hidden=\"true\"><use href=\"#i-landscape\"/></svg>横屏</li><li><svg class=\"i\" aria-hidden=\"true\"><use href=\"#g-射击\"/></svg>射击</li>"
+    },
+    {
+      "slug": "jiangzaiwai",
+      "title": "将在外",
+      "pitch": "用一句话给将领下令，可将在外，君命有所不受。",
+      "genre": "战棋",
+      "screen": "desktop",
+      "status": "wip",
+      "note": "需要自备 AI Key（DeepSeek 等），在电脑上玩",
+      "accent": "#3c8c7a",
+      "tagsHtml": "<li><svg class=\"i\" aria-hidden=\"true\"><use href=\"#i-desktop\"/></svg>电脑</li><li><svg class=\"i\" aria-hidden=\"true\"><use href=\"#g-战棋\"/></svg>战棋</li>"
+    }
+  ]
+}

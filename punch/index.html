@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+    <meta name="theme-color" content="#07080c" />
+    <title>别笑，你也防不了第二拳</title>
+    <script type="module" crossorigin src="./assets/index-Dq6GraNn.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-BouhvuZX.css">
+  </head>
+  <body>
+    <canvas id="gl"></canvas>
+    <canvas id="fx"></canvas>
+    <div id="touch"></div>
+
+    <div id="hud" class="hidden">
+      <div class="hud-top">
+        <div class="plate me">
+          <div class="plate-name"><b id="me-name">阿呆</b><span class="tries" id="tries"><i></i><i></i><i></i></span></div>
+          <div class="bar"><i class="bar-lag" id="me-lag"></i><i class="bar-fill" id="me-hp"></i></div>
+          <div class="plate-num" id="me-num">100</div>
+        </div>
+        <button id="btn-pause" class="pause" aria-label="暂停"><i></i><i></i></button>
+        <div class="plate foe">
+          <div class="plate-name"><b id="foe-name">「沙包」阿福</b></div>
+          <div class="bar"><i class="bar-lag" id="foe-lag"></i><i class="bar-fill" id="foe-hp"></i></div>
+          <div class="plate-num" id="foe-num">210</div>
+        </div>
+      </div>
+      <div class="bout-tag" id="bout-tag">地下拳场 · 第 1 场</div>
+      <div class="strip" id="strip"></div>
+      <div class="read hidden" id="read">
+        <div class="read-head"><b id="read-name">直拳</b><span class="read-dmg" id="read-dmg">-9</span></div>
+        <div class="read-tags" id="read-tags"></div>
+        <div class="read-bar"><i id="read-fill"></i></div>
+      </div>
+      <div class="res" id="res">
+        <div class="res-row stam"><small>体力</small><span id="stam-pips"></span></div>
+        <div class="res-row guard"><small>架势</small><span id="guard-pips"></span></div>
+      </div>
+      <div class="gauge" id="gauge">
+        <div class="gauge-num"><b id="gauge-now">0</b><span>/</span><b id="gauge-need">3</b></div>
+        <div class="gauge-label" id="gauge-label">防守 → 反击</div>
+        <div class="gauge-pips" id="gauge-pips"></div>
+      </div>
+      <div class="combo" id="combo"><b id="combo-n">0</b><small>HIT</small></div>
+      <div class="controls">
+        <button id="btn-duck" class="ctl duck"><span class="ico ico-duck"></span><b>下潜</b><small id="cost-duck">体力 1</small></button>
+        <button id="btn-look" class="ctl look"><span class="ico ico-look"></span><b>看穿</b><small>赌假动作</small></button>
+        <button id="btn-block" class="ctl block"><span class="ico ico-block"></span><b>格挡</b><small id="cost-block">架势 1</small></button>
+      </div>
+      <div class="side-hint left" id="hint-left">‹ 左闪</div>
+      <div class="side-hint right" id="hint-right">右闪 ›</div>
+      <div id="coach" class="coach hidden"></div>
+      <div id="callouts"></div>
+      <div id="down" class="down hidden">
+        <div class="down-count" id="down-count">1</div>
+        <div class="down-tip" id="down-tip">连点屏幕站起来！</div>
+        <div class="down-bar"><i id="down-fill"></i></div>
+      </div>
+      <div id="meme" class="meme hidden"></div>
+    </div>
+
+    <div id="screen"></div>
+    <div id="modal" class="hidden"></div>
+    <div id="toast"></div>
+  </body>
+</html>

@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+    <meta name="theme-color" content="#efe7d6" />
+    <title>泼墨大乱斗</title>
+    <script type="module" crossorigin src="./assets/index-BGoaAa_k.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-CLbJdZvs.css">
+  </head>
+  <body>
+    <div id="app">
+      <div id="touch"></div>
+
+      <div id="hud">
+        <div id="top">
+          <div id="score">
+            <span class="pct ink"><b id="pct-ink">0</b><i id="name-0">墨</i></span>
+            <div id="bar"><i id="bar-ink"></i><i id="bar-white"></i></div>
+            <span class="pct white"><i id="name-1">素</i><b id="pct-white">0</b></span>
+          </div>
+          <div id="timer">2:00</div>
+        </div>
+        <canvas id="minimap" width="128" height="72"></canvas>
+        <button id="btn-pause" class="round small" aria-label="暂停"><span>停</span></button>
+        <div id="feed"></div>
+        <div id="banner"></div>
+        <div id="respawn">被泼倒了 · <b>4</b> 秒后回印台</div>
+        <button id="btn-sub" class="round"><span>墨团</span></button>
+        <button id="btn-special" class="round"><i id="special-fill"></i><span>盖印</span></button>
+      </div>
+
+      <section id="home" class="screen on">
+        <div class="title-frame">
+          <h1><span>泼</span><span>墨</span><span>大</span><span>乱</span><span>斗</span></h1>
+          <div class="title-seal" id="title-seal">墨素</div>
+        </div>
+        <div class="home-side">
+          <div class="profile">
+            <div class="rank-seal" id="rank-seal">学徒</div>
+            <div class="prof-mid">
+              <div class="lv">Lv.<b id="lv">1</b><span id="rank-name">学徒</span></div>
+              <div class="xpbar"><i id="xp-fill"></i></div>
+            </div>
+            <div class="coins"><i class="ingot"></i><b id="coins">0</b></div>
+          </div>
+          <button id="weapon-chip" class="chip"><span>兵器</span><b id="weapon-name">竹筒墨枪</b><em>换</em></button>
+          <button id="btn-start" class="btn big">出　战</button>
+          <div class="home-row">
+            <button class="tile" id="btn-daily">每日<i class="dot" id="daily-dot"></i></button>
+            <button class="tile" id="btn-shop">坊铺</button>
+            <button class="tile" id="btn-album">画册</button>
+            <button class="tile" id="btn-settings">设置</button>
+          </div>
+          <p class="hint" id="hint-touch">左手按住移动 · 右手拖动瞄准开火</p>
+          <p class="hint" id="hint-keys">WASD 移动 · 鼠标瞄准 · 左键开火 · E 墨团 · 空格 盖印 · Esc 暂停</p>
+          <button id="btn-style" class="btn ghost small" hidden>画风 · 浅绛淡彩</button>
+        </div>
+      </section>
+
+      <section id="pick" class="screen">
+        <div class="pick-head"><h2>选兵器</h2><button class="btn ghost small back">返回</button></div>
+        <div id="cards"></div>
+      </section>
+
+      <section id="shop" class="screen">
+        <div class="pick-head">
+          <h2>坊铺</h2>
+          <div class="tabs" id="shop-tabs"><button data-tab="hats" class="on">帽子</button><button data-tab="seals">印章</button></div>
+          <div class="coins"><i class="ingot"></i><b id="shop-coins">0</b></div>
+          <button class="btn ghost small back">返回</button>
+        </div>
+        <div id="shop-grid"></div>
+      </section>
+
+      <section id="album" class="screen">
+        <div class="pick-head"><h2>画册</h2><span class="sub" id="album-count"></span><button class="btn ghost small back">返回</button></div>
+        <div id="album-grid"></div>
+      </section>
+
+      <section id="result" class="screen">
+        <div id="print-wrap"><canvas id="print"></canvas><div id="verdict-seal"></div></div>
+        <div id="result-side">
+          <div class="verdict-row"><h2 id="verdict"></h2><button id="btn-report" class="btn ghost small">战报</button></div>
+          <div id="tally"></div>
+          <div id="rewards"></div>
+          <div class="row"><button id="btn-again" class="btn">再来一局</button><button id="btn-home" class="btn ghost">回坊里</button></div>
+        </div>
+      </section>
+
+      <div id="modal"><div class="sheet" id="modal-body"></div></div>
+      <div id="rotate"><div>请把手机横过来</div></div>
+    </div>
+  </body>
+</html>

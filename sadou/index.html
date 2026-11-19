@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+    <meta name="theme-color" content="#1c1a18" />
+    <title>撒豆成兵</title>
+    <script type="module" crossorigin src="./assets/index-CM5qLFIc.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-B_kPms6i.css">
+  </head>
+  <body>
+    <div id="app">
+      <canvas id="field"></canvas>
+
+      <div id="hud" hidden>
+        <div id="top">
+          <button id="btn-pause" class="ibtn" aria-label="暂停"><i class="i-pause"></i></button>
+          <div id="tug">
+            <b id="n-ours">0</b>
+            <div id="tug-bar"><i id="tug-ours"></i><i id="tug-theirs"></i></div>
+            <b id="n-theirs">0</b>
+          </div>
+          <button id="btn-speed" class="ibtn" aria-label="倍速">1×</button>
+        </div>
+        <div id="sub-top"><span id="level-name"></span><em id="level-layer"></em><span id="clock"></span></div>
+        <div id="banner"></div>
+        <div id="toast"></div>
+
+        <div id="deploy-bar" class="bar">
+          <div class="row tools">
+            <div id="bag"><b id="bag-used">0</b><i>/</i><span id="bag-max">0</span><small id="bag-label">豆袋</small><div class="meter"><i id="bag-fill"></i></div></div>
+            <button id="btn-brush" class="tool" aria-label="笔刷大小"><i class="ring"></i><span>大笔</span></button>
+            <button id="btn-erase" class="tool"><span>收豆</span></button>
+            <button id="btn-auto" class="tool"><span>一键布阵</span></button>
+            <button id="btn-clear" class="tool"><span>清空</span></button>
+          </div>
+          <div class="row">
+            <div id="chips"></div>
+            <button id="btn-fight" class="primary">开战</button>
+          </div>
+        </div>
+
+        <div id="battle-bar" class="bar">
+          <div id="sow" hidden></div>
+          <div id="mana"><div class="meter"><i id="mana-fill"></i><div id="mana-ticks"></div></div><b id="mana-num">0</b><small>灵气</small></div>
+          <div id="cards"></div>
+        </div>
+
+        <div id="coach" hidden><div id="coach-hand"></div><div id="coach-say"></div><div id="coach-card" hidden></div></div>
+      </div>
+
+      <!-- title: the store art's red cover on top, the live demo battle in the open middle, setting out at the bottom -->
+      <section id="title" class="screen on">
+        <div class="t-top">
+          <div class="t-sky"></div>
+          <div class="t-tools">
+            <button id="btn-sound" class="t-tool" aria-label="声音：开"><i class="ibtn"><svg viewBox="0 0 24 24"><path d="M3.5 9h4l5-4.2v14.4l-5-4.2h-4z" fill="#ffcf2e" stroke="#111" stroke-width="2.2" stroke-linejoin="round"/><path class="w" d="M15.5 8.6q2.4 3.4 0 6.8M18.3 6q4.3 6 0 12" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round"/><path class="x" d="M16 9.5l5 5M21 9.5l-5 5" fill="none" stroke="#111" stroke-width="2.4" stroke-linecap="round"/></svg></i><span>声音</span></button>
+            <button id="btn-ranks" class="t-tool" hidden><i class="ibtn"><svg viewBox="0 0 24 24"><g fill="#ffcf2e" stroke="#111" stroke-width="2.2" stroke-linejoin="round"><rect x="2.5" y="12.5" width="6" height="8.5"/><rect x="9" y="6" width="6" height="15" fill="#fff"/><rect x="15.5" y="10" width="6" height="11"/></g></svg></i><span>排行榜</span></button>
+            <button id="btn-ach" class="t-tool" hidden><i class="ibtn"><svg viewBox="0 0 24 24"><g stroke="#111" stroke-width="2.2" stroke-linejoin="round"><path d="M7 2.5l5 7 5-7" fill="#ec3b2e"/><circle cx="12" cy="15" r="6.3" fill="#ffcf2e"/></g><path d="M12 11.6l1 2.1 2.3.3-1.7 1.6.4 2.3-2-1.1-2 1.1.4-2.3-1.7-1.6 2.3-.3z" fill="#fff" stroke="#111" stroke-width="1.2" stroke-linejoin="round"/></svg></i><span>成就</span></button>
+          </div>
+          <h1 class="t-logo"><span>撒豆</span><span>成兵</span></h1>
+          <p class="t-ribbon">开局一把豆，撒出百万大军</p>
+          <svg class="t-hero" viewBox="-330 -250 660 500" aria-hidden="true">
+            <defs><path id="t-bean" d="M -270 20 C -270 -160 -120 -212 -20 -160 C 30 -136 64 -136 112 -166 C 214 -214 292 -118 270 22 C 255 172 120 222 0 216 C -142 216 -270 172 -270 20 Z"/><clipPath id="t-bean-clip"><use href="#t-bean"/></clipPath></defs>
+            <use href="#t-bean" transform="translate(24 24)" fill="#fff"/>
+            <use href="#t-bean" fill="#111" stroke="#111" stroke-width="56" stroke-linejoin="round"/>
+            <g clip-path="url(#t-bean-clip)"><use href="#t-bean" fill="#e39a12"/><use href="#t-bean" fill="#ffcf2e" transform="translate(-34 -40) scale(.96)"/></g>
+            <ellipse cx="-150" cy="-80" rx="74" ry="34" fill="#fff" transform="rotate(-28 -150 -80)"/>
+            <path d="M 6 -122 Q 44 -108 84 -126" fill="none" stroke="#111" stroke-width="16" stroke-linecap="round"/>
+            <g stroke="#111" stroke-width="22" stroke-linecap="round"><line x1="-118" y1="-6" x2="-48" y2="22"/><line x1="58" y1="22" x2="128" y2="-6"/></g>
+            <ellipse cx="-74" cy="62" rx="24" ry="32" fill="#111"/><ellipse cx="88" cy="62" rx="24" ry="32" fill="#111"/>
+            <circle cx="-66" cy="50" r="8" fill="#fff"/><circle cx="96" cy="50" r="8" fill="#fff"/>
+            <path d="M -50 150 Q 8 112 66 150 Z" fill="#111"/>
+          </svg>
+        </div>
+        <!-- both modes side by side, so a new player sees from the start there is a roguelite too -->
+        <div class="t-bottom">
+          <div class="t-modes">
+            <button id="btn-start" class="t-mode campaign"><b>战役</b><small id="t-next"></small></button>
+            <button id="btn-rogue-go" class="t-mode rogue"><i class="t-tag">肉鸽</i><b>远征</b><small id="t-rogue"></small></button>
+          </div>
+        </div>
+        <button id="btn-style" class="link" hidden></button>
+      </section>
+
+      <section id="map" class="screen">
+        <header class="head">
+          <button class="ibtn back" data-go="title" aria-label="返回"><i class="i-back"></i></button>
+          <div class="tabs"><button id="tab-campaign" class="on">战役</button><button id="tab-rogue">远征<i class="dot" hidden></i></button></div>
+          <div class="gold"><i class="gold-ico"></i><b id="map-gold">0</b></div>
+          <button id="btn-farm" class="pill">豆田<i class="dot" id="farm-dot" hidden></i></button>
+        </header>
+        <div id="map-hint" hidden></div>
+        <div id="map-scroll"><div id="map-inner"></div></div>
+      </section>
+
+      <section id="rogue" class="screen">
+        <header class="head">
+          <button class="ibtn back" data-go="map" aria-label="返回"><i class="i-back"></i></button>
+          <div class="tabs"><button data-go="map">战役</button><button class="on">远征</button></div>
+          <div class="gold seeds"><i class="seed-ico"></i><b id="rogue-seeds">0</b></div>
+        </header>
+        <div id="rogue-scroll"><div id="rogue-inner"></div></div>
+      </section>
+
+      <section id="run" class="screen">
+        <header class="head run-head">
+          <button class="ibtn back" data-go="rogue" aria-label="返回"><i class="i-back"></i></button>
+          <h2 id="run-title"></h2>
+          <div class="run-stats">
+            <span class="lives" title="命"><i class="life-ico"></i><b id="run-lives">0</b></span>
+            <span class="coins" title="铜钱"><i class="coin-ico"></i><b id="run-coins">0</b></span>
+          </div>
+        </header>
+        <div class="run-bar">
+          <button id="btn-army" class="pill">豆仓 <b id="run-army">0</b></button>
+          <div id="run-relics"></div>
+        </div>
+        <div id="run-toast"></div>
+        <div id="run-scroll"><div id="run-map"></div></div>
+      </section>
+
+      <section id="farm" class="screen">
+        <header class="head">
+          <button class="ibtn back" data-go="map" aria-label="返回"><i class="i-back"></i></button>
+          <h2>豆田</h2>
+          <div class="gold"><i class="gold-ico"></i><b id="farm-gold">0</b></div>
+        </header>
+        <div id="farm-scroll"><div id="farm-inner"></div></div>
+        <div id="farm-refight" hidden><button class="primary"></button></div>
+      </section>
+
+      <div id="modal" hidden><div class="sheet" id="modal-body"></div></div>
+      <!-- dev server only: a stand-in for TapTap's rewarded video (ads/ads.ts MockAdProvider) -->
+      <div id="ad-overlay" hidden>
+        <div class="ad-box">
+          <div class="ad-tag">AD · 模拟</div>
+          <div class="ad-title">激励视频播放中</div>
+          <div class="ad-count">3</div>
+          <div class="ad-bar"><div class="ad-fill"></div></div>
+          <div class="ad-note">在 TapTap 里这里会播放激励视频</div>
+          <button class="ad-skip">关闭（不领奖励）</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

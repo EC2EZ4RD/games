@@ -1,0 +1,53 @@
+{
+  "tracks": [
+    {
+      "file": "bamboo.mp3",
+      "title": "Bamboo | Chinese Lo-Fi",
+      "by": "MVNoCopyrightMusic",
+      "page": "https://pixabay.com/music/lofi-bamboo-chinese-lo-fi-602005/",
+      "seconds": 129.55
+    },
+    {
+      "file": "wind-vibes.mp3",
+      "title": "Wind Vibes (Chinese Chill Hop)",
+      "by": "NverAvetyanMusic",
+      "page": "https://pixabay.com/music/beats-wind-vibes-chinese-chill-hop-381328/",
+      "seconds": 115.57
+    },
+    {
+      "file": "lotus-breeze.mp3",
+      "title": "Lotus Breeze (Chinese Chill Hop)",
+      "by": "NverAvetyanMusic",
+      "page": "https://pixabay.com/music/beats-lotus-breeze-chinese-chill-hop-412837/",
+      "seconds": 117.48
+    },
+    {
+      "file": "guangzuo-zingshen.mp3",
+      "title": "Lofi Song (Chinese) - Guangzuo Zingshen",
+      "by": "Lofium",
+      "page": "https://pixabay.com/music/beats-lofi-song-chinese-guangzuo-zingshen-by-lofium-123197/",
+      "seconds": 171.64
+    },
+    {
+      "file": "chinese-lofi-hip-hop.mp3",
+      "title": "Chinese Lo-FI Hip Hop",
+      "by": "NverAvetyanMusic",
+      "page": "https://pixabay.com/music/beats-chinese-lo-fi-hip-hop-132592/",
+      "seconds": 114.02
+    },
+    {
+      "file": "serenity-bliss.mp3",
+      "title": "Serenity Bliss (Chill Hop)",
+      "by": "NverAvetyanMusic",
+      "page": "https://pixabay.com/music/beats-serenity-bliss-chill-hop-367635/",
+      "seconds": 116.58
+    },
+    {
+      "file": "sky-glow.mp3",
+      "title": "Sky Glow (Chill Hop)",
+      "by": "NverAvetyanMusic",
+      "page": "https://pixabay.com/music/beats-sky-glow-chill-hop-370782/",
+      "seconds": 117.64
+    }
+  ]
+}

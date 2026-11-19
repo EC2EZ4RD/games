@@ -1,0 +1,26 @@
+{
+  "bgm-title.mp3": {
+    "start": 5.680063,
+    "end": 136.321687
+  },
+  "bgm-play.mp3": {
+    "start": 13.333333,
+    "end": 174.333333
+  },
+  "bgm-steam.mp3": {
+    "start": 5.050708,
+    "end": 131.150667
+  },
+  "bgm-desert.mp3": {
+    "start": 5.393375,
+    "end": 140.235875
+  },
+  "bgm-nordic.mp3": {
+    "start": 4.861354,
+    "end": 165.01925
+  },
+  "bgm-island.mp3": {
+    "start": 5.222604,
+    "end": 145.979854
+  }
+}

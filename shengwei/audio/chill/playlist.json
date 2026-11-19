@@ -1,0 +1,53 @@
+{
+  "tracks": [
+    {
+      "file": "good-night.mp3",
+      "title": "Good Night - Lofi Cozy Chill Music",
+      "by": "FASSounds",
+      "page": "https://pixabay.com/music/beats-good-night-lofi-cozy-chill-music-160166/",
+      "seconds": 147.12
+    },
+    {
+      "file": "lofi-study.mp3",
+      "title": "Lofi Study - Calm Peaceful Chill Hop",
+      "by": "FASSounds",
+      "page": "https://pixabay.com/music/beats-lofi-study-calm-peaceful-chill-hop-112191/",
+      "seconds": 145.18
+    },
+    {
+      "file": "once-in-paris.mp3",
+      "title": "Once In Paris",
+      "by": "Pumpupthemind",
+      "page": "https://pixabay.com/music/beats-once-in-paris-168895/",
+      "seconds": 132.34
+    },
+    {
+      "file": "night-street.mp3",
+      "title": "Night Street (Relaxed Vlog)",
+      "by": "Ashot_Danielyan",
+      "page": "https://pixabay.com/music/beats-night-street-relaxed-vlog-131746/",
+      "seconds": 138.01
+    },
+    {
+      "file": "coverless-book.mp3",
+      "title": "Coverless book ( Lofi )",
+      "by": "AmbientAUDIOVISION",
+      "page": "https://pixabay.com/music/beats-coverless-book-lofi-186307/",
+      "seconds": 252.96
+    },
+    {
+      "file": "coffee-shop.mp3",
+      "title": "Chillhop Jazz Coffee Shop",
+      "by": "alex-morgan",
+      "page": "https://pixabay.com/music/lofi-chillhop-jazz-coffee-shop-552792/",
+      "seconds": 172.4
+    },
+    {
+      "file": "long-day.mp3",
+      "title": "Long Day",
+      "by": "PurrpleCat",
+      "page": "https://pixabay.com/music/beats-long-day-518602/",
+      "seconds": 185.49
+    }
+  ]
+}

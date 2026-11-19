@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+    <meta name="theme-color" content="#84cdff" />
+    <title>喵星计划</title>
+    <!--
+      Boot guard. Plain ES5 in a classic script, so it parses in any WebView, even one too old for the game's bundle
+      (TapTap review 51130882: an old Android system WebView died on syntax, leaving a title whose buttons did nothing).
+      If a script error comes before main.ts sets window.__meowBooted, or the page has loaded and 6 s later the game
+      still has not started, it covers the page with a note: what probably went wrong, what to try, and a retry button.
+      A slow download never trips it (the clock starts at the load event); it sends nothing anywhere.
+    -->
+    <script>
+      (function () {
+        var w = window;
+        var doc = document;
+        var parsed = false;
+        var shown = false;
+        var fault = '';
+        var started = function () { return w.__meowBooted === true; };
+        // an error before the page's scripts have run (one from the host app, say) only counts if the game then
+        // still has not started: decided at DOMContentLoaded, when the game's module has run or died
+        var fail = function (why) {
+          if (started() || shown) return;
+          if (!fault) fault = why || 'Error';
+          if (parsed) show();
+        };
+        w.addEventListener('error', function (e) {
+          var t = e && e.target;
+          // a missing image or file is not a script error (a missing game bundle is the timer's case)
+          if (t && t !== w && t.nodeType === 1) return;
+          fail(String((e && e.message) || (e && e.error) || 'Error').replace(/^Uncaught /, ''));
+        });
+        w.addEventListener('unhandledrejection', function (e) {
+          var r = e && e.reason;
+          fail('Promise: ' + String((r && r.message) || r));
+        });
+        doc.addEventListener('DOMContentLoaded', function () {
+          parsed = true;
+          if (fault) show();
+        });
+        w.addEventListener('load', function () {
+          w.setTimeout(function () {
+            if (!started()) show();
+          }, 6000);
+        });
+
+        var esc = function (s) {
+          return String(s).replace(/[&<>"]/g, function (c) {
+            return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
+          });
+        };
+        var row = function (cls, icon, text) {
+          return '<div class="' + cls + '"><span class="bf-ico" aria-hidden="true">' + icon + '</span><span>' + text + '</span></div>';
+        };
+        var webgl2 = function () {
+          try {
+            return !!(w.WebGL2RenderingContext && doc.createElement('canvas').getContext('webgl2'));
+          } catch (e) {
+            return false;
+          }
+        };
+
+        function show() {
+          if (shown || started() || !doc.body) return;
+          shown = true;
+          var ua = navigator.userAgent || '';
+          var m = /Chrom(?:e|ium)\/(\d+)/.exec(ua);
+          var chrome = m ? +m[1] : 0;
+          var ios = /iPhone|iPad|iPod/.test(ua);
+          var ver = chrome ? '<span class="bf-ver">（Chrome ' + chrome + '）</span>' : '';
+          // the likeliest reason, from what can be checked here. The game is built for Chrome 79, so a Chrome version in
+          // the UA decides: on 79+ a SyntaxError is likelier a download that broke off, so it gets the generic reason
+          // and the 📡 tip. Without one (iOS, say) a SyntaxError means the engine cannot read the game
+          var tooOld = chrome ? chrome < 79 : /SyntaxError/.test(fault);
+          var noGL = !tooOld && !webgl2();
+          var reason = tooOld ? row('bf-why', '⏳', '浏览器内核太旧' + ver)
+            : noGL ? row('bf-why', '📱', '手机不支持 WebGL2')
+            : row('bf-why', '⚠️', '加载出错了');
+          // a generic failure is often a download that broke off
+          var tips = (!tooOld && !noGL ? row('bf-tip', '📡', '换个网络再试') : '') +
+            row('bf-tip', '📥', '更新 TapTap') +
+            (ios ? row('bf-tip', '⚙️', '更新 iOS 系统') : row('bf-tip', '🧩', '更新系统的「Android System WebView」')) +
+            row('bf-tip', '📲', '换一台手机');
+          var detail = (fault || 'boot timeout').slice(0, 90) + (chrome && !tooOld ? ' · Chrome ' + chrome : '');
+
+          var display = "'MeowPlanet Display','PingFang SC','Microsoft YaHei',sans-serif";
+          var css = doc.createElement('style');
+          css.textContent =
+            '#boot-fail{position:fixed;top:0;left:0;right:0;bottom:0;z-index:2147483647;display:-webkit-box;display:-webkit-flex;display:flex;' +
+            'overflow-y:auto;-webkit-overflow-scrolling:touch;padding:16px;box-sizing:border-box;background:#b9dcff;color:#1f2547;' +
+            "font-family:'MeowPlanet Body','PingFang SC','Microsoft YaHei',sans-serif;font-size:15px;line-height:1.45;text-align:left;" +
+            '-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}' +
+            '#boot-fail *{box-sizing:border-box}' +
+            '#boot-fail .bf-card{position:relative;margin:auto;width:100%;max-width:340px;padding:20px 18px 16px 20px;' +
+            'background:#fff;border-left:5px solid #ff4f8f;-webkit-filter:drop-shadow(4px 4px 0 rgba(31,37,71,.22));filter:drop-shadow(4px 4px 0 rgba(31,37,71,.22));' +
+            'background:linear-gradient(-45deg,transparent 15px,#fff 15px)}' +
+            '#boot-fail .bf-card:after{content:"";position:absolute;right:0;bottom:0;width:26px;height:26px;' +
+            'background:linear-gradient(-45deg,transparent 17px,#1f2547 17px,#1f2547 18.5px,transparent 18.5px)}' +
+            '#boot-fail .bf-head{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;' +
+            'margin:0 0 14px;font-family:' + display + ';font-size:27px;line-height:1.15;letter-spacing:1px;font-weight:normal}' +
+            '#boot-fail .bf-head .bf-ico{font-size:34px;width:auto;margin-right:10px}' +
+            '#boot-fail .bf-why,#boot-fail .bf-tip,#boot-fail .bf-label,#boot-fail .bf-detail{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-align-items:flex-start;align-items:flex-start}' +
+            '#boot-fail .bf-why{padding:9px 12px;background:#ffe0ec;border:1.5px solid #1f2547;font-family:' + display + ';font-size:19px;' +
+            'line-height:1.3;-webkit-transform:skewX(-6deg);transform:skewX(-6deg);box-shadow:3px 3px 0 #1f2547}' +
+            '#boot-fail .bf-tips{margin:16px 0 0}' +
+            '#boot-fail .bf-tip{margin-top:6px}' +
+            '#boot-fail .bf-label{color:#5b6185;font-size:13px;margin:0 0 2px}' +
+            "#boot-fail .bf-ico{-webkit-box-flex:0;-webkit-flex:none;flex:none;width:1.5em;margin-right:6px;text-align:center;" +
+            "font-family:'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif;font-style:normal}" +
+            '#boot-fail .bf-retry{position:relative;overflow:hidden;display:-webkit-box;display:-webkit-flex;display:flex;' +
+            '-webkit-align-items:center;align-items:center;-webkit-justify-content:center;justify-content:center;width:100%;min-height:52px;' +
+            'margin:20px 0 0;padding:0 24px;background:#ff4f8f;color:#fff;border:1.5px solid #1f2547;border-radius:999px;' +
+            'box-shadow:3px 3px 0 #1f2547;font-family:' + display + ';font-size:21px;letter-spacing:1px;cursor:pointer;' +
+            '-webkit-appearance:none;appearance:none;outline:none}' +
+            '#boot-fail .bf-retry:before{content:"";position:absolute;top:0;left:14%;width:18px;height:100%;' +
+            'background:rgba(255,255,255,.35);-webkit-transform:skewX(-25deg);transform:skewX(-25deg)}' +
+            '#boot-fail .bf-retry:active{-webkit-transform:translate(3px,3px);transform:translate(3px,3px);box-shadow:0 0 0 #1f2547}' +
+            '#boot-fail .bf-retry svg{width:22px;height:22px;margin-right:8px;-webkit-flex:none;flex:none}' +
+            '#boot-fail .bf-detail{margin:14px 0 0;color:#8a8fae;font-size:11px;line-height:1.35;word-wrap:break-word;overflow-wrap:break-word}' +
+            '#boot-fail .bf-ver{display:inline-block;white-space:nowrap}' +
+            '#boot-fail .bf-detail .bf-ico{width:1.4em;margin-right:4px}';
+          (doc.head || doc.body).appendChild(css);
+
+          var box = doc.createElement('div');
+          box.id = 'boot-fail';
+          box.setAttribute('role', 'alert');
+          box.innerHTML =
+            '<div class="bf-card">' +
+            '<div class="bf-head"><span class="bf-ico" aria-hidden="true">😿</span><span>游戏没能启动</span></div>' +
+            reason +
+            '<div class="bf-tips">' + row('bf-label', '💡', '可以试试：') + tips + '</div>' +
+            '<button type="button" class="bf-retry">' +
+            '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">' +
+            '<path d="M23 4v6h-6"/><path d="M20.5 15a9 9 0 1 1-2.1-9.4L23 10"/></svg><span>再试一次</span></button>' +
+            row('bf-detail', '🔍', esc(detail)) +
+            '</div>';
+          box.getElementsByTagName('button')[0].onclick = function () {
+            w.location.reload();
+          };
+          doc.body.appendChild(box);
+        }
+      })();
+    </script>
+    <script type="module" crossorigin src="./assets/game-B6c_dzr_.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/game-DCRAnwMY.css">
+  </head>
+  <body>
+    <canvas id="bg"></canvas>
+    <canvas id="gl"></canvas>
+    <canvas id="game"></canvas>
+
+    <header id="hud" class="hidden">
+      <div class="plate"><small>DAY</small><b id="day">1</b></div>
+      <div class="plate energy"><i class="yarn"></i><small>YARN</small><b id="energy">0</b></div>
+      <div class="hud-buttons">
+        <button id="btn-bonus" class="round-btn bonus-btn" aria-label="查看当前加成"></button>
+        <button id="btn-speed" class="round-btn" aria-label="速度"></button>
+        <button id="btn-pause" class="round-btn" aria-label="暂停"></button>
+      </div>
+    </header>
+
+    <div id="buffs" class="hidden" aria-live="polite"></div>
+    <div id="hint" class="hidden"></div>
+    <div id="region-card" class="hidden"></div>
+    <button id="btn-return-planet" class="btn landscape-back hidden">返回星球</button>
+    <div id="map-tools" class="hidden">
+      <button id="btn-left" class="round-btn hidden" aria-label="还没占满的地"></button>
+      <button id="btn-magnet" class="round-btn magnet hidden" aria-label="看广告：自动收毛线球"></button>
+      <div class="lens-row">
+        <div id="lens-legend" class="lens-legend hidden"></div>
+        <button id="btn-lens" class="round-btn" aria-label="地图图层"></button>
+      </div>
+      <button id="btn-home" class="round-btn hidden" aria-label="回到起点"></button>
+    </div>
+
+    <footer id="bottom" class="hidden">
+      <div class="panel status">
+        <div id="news"><span class="tag">NEWS</span><span id="news-text"></span></div>
+        <div class="meter" id="meter-cats">
+          <span class="meter-icon"><img id="icon-cat" alt="" /></span>
+          <div class="meter-body">
+            <div class="meter-label"><small>CATS · 铲屎官</small><b id="txt-cats">0</b></div>
+            <div class="meter-track"><div id="bar-cats" class="meter-fill cats"></div></div>
+          </div>
+        </div>
+        <div class="meter" id="row-vac">
+          <span class="meter-icon"><img id="icon-dog" alt="" /></span>
+          <div class="meter-body">
+            <div class="meter-label"><small id="lbl-vac">DOGS · 狗派察觉</small><b id="txt-vac">0%</b></div>
+            <div class="meter-track"><div id="bar-vac" class="meter-fill vac"></div></div>
+          </div>
+        </div>
+      </div>
+      <button id="btn-skills" class="btn primary wide"><img id="icon-paw" alt="" /><span>喵技能</span><small>SKILL</small><b id="skill-count" class="skill-count" aria-hidden="true"></b></button>
+    </footer>
+
+    <section id="tree" class="hidden">
+      <div class="tree-head">
+        <div><span class="tag">SKILL TREE</span><h2 class="tree-title">喵技能</h2></div>
+        <div class="tree-head-side">
+          <button class="round-btn bonus-btn tree-bonus" aria-label="查看当前加成"></button>
+          <div class="plate energy"><i class="yarn"></i><small>YARN</small><b class="tree-energy">0</b></div>
+        </div>
+      </div>
+      <div class="tree-tabs" role="tablist" aria-label="技能分类"></div>
+      <p class="tree-brief" aria-live="polite"></p>
+      <p id="tree-gesture-hint" class="tree-gesture-hint">轻点查看 · <strong>长按升级</strong> · 双指缩放、拖动</p>
+      <canvas class="tree-canvas" aria-label="技能图谱" aria-describedby="tree-gesture-hint"></canvas>
+      <div class="tree-card panel">
+        <div class="tree-detail"></div>
+        <div class="tree-actions">
+          <button class="btn secondary tree-close">回到星球</button>
+          <button class="btn primary tree-hold"><span class="hold-fill"></span><span class="hold-label">按住学会</span></button>
+        </div>
+      </div>
+    </section>
+
+    <section id="screen-title" class="screen">
+      <div class="title-tools">
+        <button id="btn-music-title" class="round-btn" aria-label="音乐"></button>
+        <button id="btn-sfx-title" class="round-btn" aria-label="音效"></button>
+        <button id="btn-achievements" class="round-btn hidden" aria-label="成就"></button>
+        <button id="btn-leaderboards" class="round-btn hidden" aria-label="排行榜"></button>
+      </div>
+      <div class="title-top">
+        <p class="logo-en">MEOW PLANET PROJECT</p>
+        <h1 class="logo">喵星计划</h1>
+        <p class="tagline">让全星球的人类，都成为铲屎官</p>
+      </div>
+      <div class="title-bottom">
+        <button id="btn-start" class="btn primary big">开始游戏<small>START</small></button>
+        <div class="title-row">
+          <button id="btn-planets" class="btn secondary">星球</button>
+          <button id="btn-strains" class="btn secondary">猫种</button>
+          <span id="den-entry" class="den-entry hidden"><button id="btn-den" class="btn secondary">猫窝</button><i id="den-gift-dot" class="gift-dot hidden"></i><i id="den-bowl-dot" class="gift-dot bowl hidden"></i></span>
+        </div>
+        <div class="plate cans"><img class="can-icon" alt="" /><small>CANS</small><b id="cans">0</b></div>
+        <button id="btn-tutorial" class="link hidden">重玩新手岛</button>
+      </div>
+    </section>
+
+    <section id="screen-planets" class="screen hidden">
+      <div class="panel planets-panel">
+        <span class="nametag">选择星球</span>
+        <div id="planet-list" class="planet-list"></div>
+        <div class="panel-actions">
+          <button id="btn-planets-back" class="btn secondary">返回</button>
+          <button id="btn-planets-next" class="btn primary">选猫种<small>NEXT</small></button>
+        </div>
+      </div>
+    </section>
+
+    <section id="screen-strains" class="screen hidden">
+      <div class="panel strains-panel">
+        <span class="nametag">选择猫种</span>
+        <div class="panel-cans plate"><img class="can-icon" alt="" /><b id="cans2">0</b></div>
+        <div id="strain-list" class="strain-list"></div>
+        <button id="btn-boost" class="btn ad boost hidden"></button>
+        <div class="panel-actions">
+          <button id="btn-strains-back" class="btn secondary">返回</button>
+          <button id="btn-go" class="btn primary">出发<small>GO</small></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 猫窝 (main.ts showDen, ui/denScreen.ts): the cat itself is drawn in the 3D scene between the two bars -->
+    <section id="screen-den" class="screen hidden">
+      <div class="den-top">
+        <span id="den-name" class="nametag"></span>
+        <span id="den-love" class="den-love"></span>
+        <div class="den-cans plate"><img class="can-icon" alt="" /><b id="cans3">0</b></div>
+      </div>
+      <button id="den-gift" class="den-gift hidden" aria-label="礼物"></button>
+      <div id="den-tags" class="den-tags" aria-hidden="true"></div>
+      <div id="den-corner" class="den-corner">
+        <button id="btn-den-basket" class="den-round hidden" aria-label="客人留下的"></button>
+        <span class="spacer"></span>
+        <button id="btn-den-album" class="den-round" aria-label="相册"></button>
+        <button id="btn-den-shop" class="den-round" aria-label="好物"></button>
+      </div>
+      <div class="den-bottom">
+        <div id="den-cats" class="den-cats"></div>
+        <div class="panel-actions">
+          <button id="btn-den-back" class="btn secondary">返回</button>
+          <button id="btn-den-go" class="btn primary">带它出发</button>
+        </div>
+      </div>
+    </section>
+    <div id="den-fx" aria-hidden="true"></div>
+
+    <div id="modal" class="hidden"><div class="modal-card panel"></div></div>
+
+    <div id="ad-overlay" class="hidden">
+      <div class="ad-box">
+        <div class="ad-tag">AD · 模拟</div>
+        <div class="ad-title">激励视频播放中</div>
+        <div class="ad-count">3</div>
+        <div class="ad-bar"><div class="ad-fill"></div></div>
+        <div class="ad-note">正式版会在这里接入激励视频 SDK</div>
+        <button class="ad-skip">关闭（不领奖励）</button>
+      </div>
+    </div>
+
+    <div id="toast"></div>
+  </body>
+</html>
