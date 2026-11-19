@@ -324,6 +324,32 @@ svg.i { width: 1.15em; height: 1.15em; flex: none; vertical-align: -0.2em; }
 .foot span { display: inline-flex; align-items: center; gap: 6px; }
 .foot a { color: var(--ink-soft); }
 
+/* ── a collection: one card for a set of games, its picture three phones fanned out ── */
+.card.collection .device.portrait.fan { width: 36%; top: 13%; }
+.card.collection .fan-l { left: 29%; transform: translateX(-50%) rotate(-12deg); }
+.card.collection .fan-r { left: 71%; transform: translateX(-50%) rotate(10deg); }
+.card.collection .fan-c { left: 50%; top: 8%; z-index: 1; transform: translateX(-50%) rotate(-2deg); }
+.card.collection:hover .fan-l { transform: translateX(-60%) rotate(-15deg); }
+.card.collection:hover .fan-r { transform: translateX(-40%) rotate(13deg); }
+.card.collection:hover .fan-c { transform: translateX(-50%) translateY(-4%) rotate(-1deg); }
+/* on a collection's own page: the way back to the hub */
+.back-hub {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 0 8px;
+  padding: 5px 12px 4px 9px;
+  font: 400 15px/1 var(--display);
+  color: var(--ink);
+  text-decoration: none;
+  background: var(--card);
+  border: 2.5px solid var(--line);
+  border-radius: 999px;
+  box-shadow: 0 4px 0 var(--line);
+}
+.back-hub:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--line); }
+.back-hub svg.i { width: 20px; height: 20px; }
+
 @media (max-width: 720px) {
   .top { padding: 26px 16px 4px; }
   .brand { gap: 12px; }

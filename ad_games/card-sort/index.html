@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+    <meta name="theme-color" content="#2b2540" />
+    <title>分门别类</title>
+    <link rel="icon" href="data:," />
+    <!--
+      Boot guard, plain ES5 so it parses in any WebView, even one too old for the game's bundle. If a script
+      error comes before the kit sets window.__booted, or 6 s after the load event the game still hasn't
+      started, it covers the page with what probably went wrong and a retry button instead of a dead screen.
+      A slow download never trips it (the clock starts at load). It sends nothing anywhere.
+    -->
+    <script>
+      (function () {
+        var w = window, doc = document, parsed = false, shown = false, fault = '';
+        var started = function () { return w.__booted === true; };
+        var fail = function (why) {
+          if (started() || shown) return;
+          if (!fault) fault = why || 'Error';
+          if (parsed) show();
+        };
+        w.addEventListener('error', function (e) {
+          var t = e && e.target;
+          if (t && t !== w && t.nodeType === 1) return; // a missing picture is not a script error
+          fail(String((e && e.message) || 'Error'));
+        });
+        w.addEventListener('unhandledrejection', function (e) { fail('Promise: ' + String((e && e.reason && e.reason.message) || (e && e.reason))); });
+        doc.addEventListener('DOMContentLoaded', function () { parsed = true; if (fault) show(); });
+        w.addEventListener('load', function () { w.setTimeout(function () { if (!started()) show(); }, 6000); });
+        function show() {
+          if (shown || started() || !doc.body) return;
+          shown = true;
+          var m = /Chrom(?:e|ium)\/(\d+)/.exec(navigator.userAgent || '');
+          var chrome = m ? +m[1] : 0;
+          var old = chrome ? chrome < 79 : /SyntaxError/.test(fault);
+          var box = doc.createElement('div');
+          box.setAttribute('role', 'alert');
+          box.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;z-index:2147483647;display:-webkit-box;display:-webkit-flex;display:flex;' +
+            '-webkit-align-items:center;align-items:center;-webkit-justify-content:center;justify-content:center;padding:20px;background:#2b2540;' +
+            'font:16px/1.5 system-ui,"PingFang SC","Microsoft YaHei",sans-serif;color:#221f2e';
+          box.innerHTML = '<div style="max-width:320px;width:100%;padding:20px;background:#fffcf6;border:3px solid #221f2e;border-radius:18px;box-shadow:6px 6px 0 #221f2e">' +
+            '<div style="font-size:22px;margin-bottom:10px">' + (old ? '⏳ 浏览器内核太旧' : '⚠️ 游戏没能启动') + '</div>' +
+            '<div>📡 换个网络再试<br>📥 更新 TapTap 或浏览器<br>🧩 更新系统的「Android System WebView」</div>' +
+            '<button type="button" style="margin-top:16px;width:100%;min-height:50px;font-size:20px;background:#ff5c8a;color:#fff;border:3px solid #221f2e;border-radius:999px">🔄 再试一次</button>' +
+            '<div style="margin-top:12px;font-size:11px;color:#8a8496;word-wrap:break-word">' + String(fault || 'boot timeout').slice(0, 90).replace(/[<>&]/g, '') + (chrome ? ' · Chrome ' + chrome : '') + '</div></div>';
+          box.getElementsByTagName('button')[0].onclick = function () { w.location.reload(); };
+          doc.body.appendChild(box);
+        }
+      })();
+    </script>
+    <script type="module" crossorigin src="./assets/index-BX4PMyuk.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-xmmInDlZ.css">
+  </head>
+  <body>
+    <div id="app"></div>
+  
+
+
+
+
+<!-- hub-loader:start -->
+<style>
+@font-face{font-family:'Hub Display';src:url('../../fonts/hub-display.woff2') format('woff2');font-display:swap}
+#hub-ld{position:fixed;top:0;left:0;right:0;bottom:0;z-index:2147483000;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;box-sizing:border-box;background:#3f8f6b;background:radial-gradient(120% 80% at 82% 0%,rgba(255,255,255,.3),rgba(255,255,255,0) 62%),linear-gradient(165deg,#62a386,#3f8f6b 55%,#2d674d);color:#fff;font-family:system-ui,-apple-system,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;text-align:center;opacity:1;transition:opacity .4s ease;-webkit-user-select:none;user-select:none;touch-action:none}
+#hub-ld.out{opacity:0;pointer-events:none}
+#hub-ld *{box-sizing:border-box}
+#hub-ld h1{margin:0;font:400 44px/1.12 'Hub Display','PingFang SC','Microsoft YaHei',sans-serif;letter-spacing:.02em;color:#fff;text-shadow:3px 3px 0 #221f2e}
+#hub-ld .p{margin:12px 0 0;max-width:21em;font-size:14px;line-height:1.6;color:#221f2e}
+#hub-ld .bar{position:relative;width:300px;max-width:72vw;height:26px;margin:52px 0 0;background:#fffcf6;border:3px solid #221f2e;border-radius:11px;box-shadow:4px 4px 0 #221f2e}
+#hub-ld .fill{position:absolute;left:0;top:0;bottom:0;width:0;background:#221f2e;border-radius:7px;transition:width .25s ease}
+#hub-ld .flag{position:absolute;bottom:100%;left:0;width:26px;height:32px;margin:0 0 -5px -4px;transition:left .25s ease}
+#hub-ld .num{margin:14px 0 0;font:400 24px/1 'Hub Display',sans-serif;color:#fff;text-shadow:2px 2px 0 #221f2e}
+#hub-ld .mb{margin-left:10px;font:13px/1 system-ui,-apple-system,sans-serif;color:#221f2e;text-shadow:none}
+#hub-ld .hint{min-height:1.6em;margin:14px 0 0;font-size:13px;color:#221f2e}
+#hub-ld .retry{display:none;margin:14px 0 0;padding:11px 24px 9px;font:400 20px/1 'Hub Display','PingFang SC','Microsoft YaHei',sans-serif;color:#221f2e;background:#fffcf6;border:3px solid #221f2e;border-radius:12px;box-shadow:0 5px 0 #221f2e;cursor:pointer}
+#hub-ld.fail .retry{display:inline-block}
+#hub-ld.fail .bar,#hub-ld.fail .num{opacity:.45}
+@media (max-width:400px){#hub-ld h1{font-size:36px}}
+@media (min-width:900px) and (min-height:560px){#hub-ld h1{font-size:64px}#hub-ld .p{max-width:26em;font-size:16px}#hub-ld .bar{width:400px;height:30px}#hub-ld .flag{width:30px;height:37px}#hub-ld .num{font-size:28px}}
+@media (prefers-reduced-motion:reduce){#hub-ld,#hub-ld .fill,#hub-ld .flag{transition:none}}
+</style>
+<div id="hub-ld" role="progressbar" aria-label="分门别类 加载中" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+<h1>分门别类</h1>
+<p class="p">像接龙一样挪牌，把同一类的词收进同一个盒子。</p>
+<div class="bar"><div class="fill"></div><svg class="flag" viewBox="0 0 26 32" aria-hidden="true"><path d="M4 30V4" stroke="#221f2e" stroke-width="3" stroke-linecap="round" fill="none"/><path d="M5.5 4.5h16.5l-4.4 5.3 4.4 5.3H5.5z" fill="#f2b632" stroke="#221f2e" stroke-width="2.4" stroke-linejoin="round"/></svg></div>
+<div class="num"><span class="pct">0%</span><span class="mb"></span></div>
+<p class="hint"></p>
+<button class="retry" type="button">重新加载</button>
+</div>
+<script>(function () {
+  var C = {"files":[["./assets/display-CHJggUP2.woff2",94884],["./assets/index-BX4PMyuk.js",50607],["./assets/index-xmmInDlZ.css",6190]],"total":151681};
+  var d = document, root = d.getElementById('hub-ld');
+  if (!root) return;
+  var fill = root.querySelector('.fill'), flag = root.querySelector('.flag'), pct = root.querySelector('.pct');
+  var mb = root.querySelector('.mb'), hint = root.querySelector('.hint');
+  var t0 = Date.now(), got = 0, filesDone = 0, modules = -1, loaded = 0, over = false, failed = false, gone = false, queued = false;
+  var size = function (b) { return (b / 1048576).toFixed(1); };
+  function paint() {
+    queued = false;
+    var f = C.total ? Math.min(1, got / C.total) : 1, p = Math.floor(f * 100);
+    fill.style.width = (f * 100) + '%';
+    flag.style.left = (f * 100) + '%';
+    pct.textContent = p + '%';
+    mb.textContent = size(Math.min(got, C.total)) + ' / ' + size(C.total) + ' MB';
+    root.setAttribute('aria-valuenow', String(p));
+    // everything is in: the game is starting up (parsing its code, building its first frame)
+    if (f >= 1 && !failed) hint.textContent = '\u6b63\u5728\u542f\u52a8\u2026';
+  }
+  function count(n) {
+    got += n;
+    if (queued) return;
+    queued = true;
+    (window.requestAnimationFrame || setTimeout)(paint);
+  }
+  paint();
+  // the game's files: the browser fetches them for the game at the same time and shares them
+  if (window.fetch && C.files.length) {
+    C.files.forEach(function (f) {
+      var url = f[0], want = f[1], seen = 0;
+      var settle = function () { if (seen < want) count(want - seen); seen = want; filesDone++; check(); };
+      fetch(url, { credentials: 'same-origin' }).then(function (res) {
+        if (!res.ok || !res.body || !res.body.getReader) return res.arrayBuffer();
+        var rd = res.body.getReader();
+        var pump = function () {
+          return rd.read().then(function (r) {
+            if (r.done) return;
+            var n = Math.min(r.value.length, want - seen);
+            if (n > 0) { seen += n; count(n); }
+            return pump();
+          });
+        };
+        return pump();
+      }).then(settle, settle);
+    });
+  } else {
+    filesDone = C.files.length;
+  }
+  // the game has started once each of its module scripts has run
+  var isModule = function (t) { return t && t.tagName === 'SCRIPT' && t.type === 'module'; };
+  d.addEventListener('load', function (e) { if (isModule(e.target)) { loaded++; check(); } }, true);
+  d.addEventListener('error', function (e) { if (isModule(e.target)) fail(); }, true);
+  var countModules = function () { modules = d.querySelectorAll('script[type="module"][src]').length; check(); };
+  if (d.readyState === 'loading') d.addEventListener('DOMContentLoaded', countModules); else countModules();
+  var tick = setInterval(function () {
+    if (over || failed) { clearInterval(tick); return; }
+    if (Date.now() - t0 > 9000 && got < C.total) hint.textContent = '\u7f51\u7edc\u6709\u70b9\u6162\uff0c\u6b63\u5728\u52aa\u529b\u52a0\u8f7d\u2026';
+    check();
+  }, 1000);
+  function check() {
+    if (over || failed) return;
+    var started = modules >= 0 && loaded >= modules;
+    if (started && (filesDone >= C.files.length || Date.now() - t0 > 25000)) finish();
+  }
+  function frames(n, cb) {
+    if (!window.requestAnimationFrame) { setTimeout(cb, 50); return; }
+    requestAnimationFrame(function () { if (n > 1) frames(n - 1, cb); else cb(); });
+  }
+  function finish() {
+    over = true;
+    got = C.total;
+    paint();
+    var go = function () { frames(2, hide); };
+    if (d.fonts && d.fonts.ready) d.fonts.ready.then(go, go); else go();
+    setTimeout(hide, 4000); // never keep the game covered for long
+  }
+  function hide() {
+    if (gone) return;
+    gone = true;
+    root.className += ' out';
+    setTimeout(function () { if (root.parentNode) root.parentNode.removeChild(root); }, 450);
+  }
+  function fail() {
+    if (over || failed) return;
+    failed = true;
+    root.className += ' fail';
+    hint.textContent = '\u6ca1\u52a0\u8f7d\u51fa\u6765\uff0c\u53ef\u80fd\u662f\u7f51\u7edc\u65ad\u4e86';
+  }
+  root.querySelector('.retry').onclick = function () { location.reload(); };
+})();</script>
+<!-- hub-loader:end -->
+</body>
+</html>
