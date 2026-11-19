@@ -8,7 +8,7 @@
       "title": "真·广告游戏",
       "pitch": "那些点进去却不是它的小游戏广告，一款款做成了真的。",
       "accent": "#ff5c8a",
-      "count": 35
+      "count": 37
     }
   ],
   "games": [
@@ -490,6 +490,28 @@
       "accent": "#e8573f",
       "collection": "ad_games",
       "tagsHtml": "<li><svg class=\"i\" aria-hidden=\"true\"><use href=\"#i-portrait\"/></svg>竖屏</li><li><svg class=\"i\" aria-hidden=\"true\"><use href=\"#g-策略\"/></svg>策略</li>"
+    },
+    {
+      "slug": "ad_games/who-dies",
+      "title": "猜谁先死",
+      "pitch": "锤子、炸弹、翘翘板一起开动之前，先猜几个火柴人里谁先倒下。",
+      "genre": "解谜",
+      "screen": "portrait",
+      "status": "beta",
+      "accent": "#e8443a",
+      "collection": "ad_games",
+      "tagsHtml": "<li><svg class=\"i\" aria-hidden=\"true\"><use href=\"#i-portrait\"/></svg>竖屏</li><li><svg class=\"i\" aria-hidden=\"true\"><use href=\"#g-解谜\"/></svg>解谜</li>"
+    },
+    {
+      "slug": "ad_games/sand-blocks",
+      "title": "沙画消除",
+      "pitch": "点一杯彩沙，沙子流进同色的格子，一层层把像素画填满。",
+      "genre": "解谜",
+      "screen": "portrait",
+      "status": "beta",
+      "accent": "#f39a2b",
+      "collection": "ad_games",
+      "tagsHtml": "<li><svg class=\"i\" aria-hidden=\"true\"><use href=\"#i-portrait\"/></svg>竖屏</li><li><svg class=\"i\" aria-hidden=\"true\"><use href=\"#g-解谜\"/></svg>解谜</li>"
     }
   ]
 }
