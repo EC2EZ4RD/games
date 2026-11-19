@@ -642,6 +642,54 @@
       "licenseFiles": [
         "../../kit/fonts-src/OFL-SmileySans.txt"
       ]
+    },
+    {
+      "slug": "ad_games/raft-salvage",
+      "title": "海上漂流",
+      "pitch": "一块木板起家，钩回漂来的木头和桶，把筏子造大，开到岸边。",
+      "genre": "休闲",
+      "screen": "portrait",
+      "status": "beta",
+      "collection": "ad_games",
+      "accent": "#e8573f",
+      "dir": "../ad-games/games/raft-salvage",
+      "build": "npm run build:web",
+      "out": "dist-web",
+      "licenseFiles": [
+        "../../kit/fonts-src/OFL-SmileySans.txt"
+      ]
+    },
+    {
+      "slug": "ad_games/line-stick",
+      "title": "画线火柴人",
+      "pitch": "画什么就是什么：画根棍子打人，画块板子挡炮，画把伞飘过去。",
+      "genre": "解谜",
+      "screen": "portrait",
+      "status": "beta",
+      "collection": "ad_games",
+      "accent": "#2f55d4",
+      "dir": "../ad-games/games/line-stick",
+      "build": "npm run build:web",
+      "out": "dist-web",
+      "licenseFiles": [
+        "../../kit/fonts-src/OFL-SmileySans.txt"
+      ]
+    },
+    {
+      "slug": "ad_games/bug-fight",
+      "title": "抓虫斗虫",
+      "pitch": "翻开木头抓甲虫，喂大了带去树桩上顶架，一路打到虫王。",
+      "genre": "策略",
+      "screen": "portrait",
+      "status": "beta",
+      "collection": "ad_games",
+      "accent": "#e8573f",
+      "dir": "../ad-games/games/bug-fight",
+      "build": "npm run build:web",
+      "out": "dist-web",
+      "licenseFiles": [
+        "../../kit/fonts-src/OFL-SmileySans.txt"
+      ]
     }
   ]
 }
