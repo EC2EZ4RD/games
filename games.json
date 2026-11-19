@@ -722,6 +722,38 @@
       "licenseFiles": [
         "../../kit/fonts-src/OFL-SmileySans.txt"
       ]
+    },
+    {
+      "slug": "ad_games/melon-merge",
+      "title": "合成大西瓜",
+      "pitch": "丢水果，两个一样的碰在一起就合成大一号，一路合到大西瓜。",
+      "genre": "合成",
+      "screen": "portrait",
+      "status": "beta",
+      "collection": "ad_games",
+      "accent": "#4cae4c",
+      "dir": "../ad-games/games/melon-merge",
+      "build": "npm run build:web",
+      "out": "dist-web",
+      "licenseFiles": [
+        "../../kit/fonts-src/OFL-SmileySans.txt"
+      ]
+    },
+    {
+      "slug": "ad_games/grab-goose",
+      "title": "抓大鹅",
+      "pitch": "一锅菜堆成山，只能拿最上面的，凑齐三个一样的消掉。",
+      "genre": "休闲",
+      "screen": "portrait",
+      "status": "beta",
+      "collection": "ad_games",
+      "accent": "#e0564e",
+      "dir": "../ad-games/games/grab-goose",
+      "build": "npm run build:web",
+      "out": "dist-web",
+      "licenseFiles": [
+        "../../kit/fonts-src/OFL-SmileySans.txt"
+      ]
     }
   ]
 }
