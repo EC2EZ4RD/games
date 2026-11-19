@@ -8,7 +8,7 @@
       "title": "真·广告游戏",
       "pitch": "那些点进去却不是它的小游戏广告，一款款做成了真的。",
       "accent": "#ff5c8a",
-      "count": 32
+      "count": 35
     }
   ],
   "games": [
@@ -457,6 +457,39 @@
       "accent": "#3f7fd6",
       "collection": "ad_games",
       "tagsHtml": "<li><svg class=\"i\" aria-hidden=\"true\"><use href=\"#i-portrait\"/></svg>竖屏</li><li><svg class=\"i\" aria-hidden=\"true\"><use href=\"#g-解谜\"/></svg>解谜</li>"
+    },
+    {
+      "slug": "ad_games/raft-salvage",
+      "title": "海上漂流",
+      "pitch": "一块木板起家，钩回漂来的木头和桶，把筏子造大，开到岸边。",
+      "genre": "休闲",
+      "screen": "portrait",
+      "status": "beta",
+      "accent": "#e8573f",
+      "collection": "ad_games",
+      "tagsHtml": "<li><svg class=\"i\" aria-hidden=\"true\"><use href=\"#i-portrait\"/></svg>竖屏</li><li><svg class=\"i\" aria-hidden=\"true\"><use href=\"#g-休闲\"/></svg>休闲</li>"
+    },
+    {
+      "slug": "ad_games/line-stick",
+      "title": "画线火柴人",
+      "pitch": "画什么就是什么：画根棍子打人，画块板子挡炮，画把伞飘过去。",
+      "genre": "解谜",
+      "screen": "portrait",
+      "status": "beta",
+      "accent": "#2f55d4",
+      "collection": "ad_games",
+      "tagsHtml": "<li><svg class=\"i\" aria-hidden=\"true\"><use href=\"#i-portrait\"/></svg>竖屏</li><li><svg class=\"i\" aria-hidden=\"true\"><use href=\"#g-解谜\"/></svg>解谜</li>"
+    },
+    {
+      "slug": "ad_games/bug-fight",
+      "title": "抓虫斗虫",
+      "pitch": "翻开木头抓甲虫，喂大了带去树桩上顶架，一路打到虫王。",
+      "genre": "策略",
+      "screen": "portrait",
+      "status": "beta",
+      "accent": "#e8573f",
+      "collection": "ad_games",
+      "tagsHtml": "<li><svg class=\"i\" aria-hidden=\"true\"><use href=\"#i-portrait\"/></svg>竖屏</li><li><svg class=\"i\" aria-hidden=\"true\"><use href=\"#g-策略\"/></svg>策略</li>"
     }
   ]
 }
