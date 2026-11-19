@@ -8,7 +8,7 @@
       "title": "真·广告游戏",
       "pitch": "那些点进去却不是它的小游戏广告，一款款做成了真的。",
       "accent": "#ff5c8a",
-      "count": 37
+      "count": 39
     }
   ],
   "games": [
@@ -512,6 +512,28 @@
       "accent": "#f39a2b",
       "collection": "ad_games",
       "tagsHtml": "<li><svg class=\"i\" aria-hidden=\"true\"><use href=\"#i-portrait\"/></svg>竖屏</li><li><svg class=\"i\" aria-hidden=\"true\"><use href=\"#g-解谜\"/></svg>解谜</li>"
+    },
+    {
+      "slug": "ad_games/melon-merge",
+      "title": "合成大西瓜",
+      "pitch": "丢水果，两个一样的碰在一起就合成大一号，一路合到大西瓜。",
+      "genre": "合成",
+      "screen": "portrait",
+      "status": "beta",
+      "accent": "#4cae4c",
+      "collection": "ad_games",
+      "tagsHtml": "<li><svg class=\"i\" aria-hidden=\"true\"><use href=\"#i-portrait\"/></svg>竖屏</li><li><svg class=\"i\" aria-hidden=\"true\"><use href=\"#g-合成\"/></svg>合成</li>"
+    },
+    {
+      "slug": "ad_games/grab-goose",
+      "title": "抓大鹅",
+      "pitch": "一锅菜堆成山，只能拿最上面的，凑齐三个一样的消掉。",
+      "genre": "休闲",
+      "screen": "portrait",
+      "status": "beta",
+      "accent": "#e0564e",
+      "collection": "ad_games",
+      "tagsHtml": "<li><svg class=\"i\" aria-hidden=\"true\"><use href=\"#i-portrait\"/></svg>竖屏</li><li><svg class=\"i\" aria-hidden=\"true\"><use href=\"#g-休闲\"/></svg>休闲</li>"
     }
   ]
 }
