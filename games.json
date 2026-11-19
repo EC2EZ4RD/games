@@ -690,6 +690,38 @@
       "licenseFiles": [
         "../../kit/fonts-src/OFL-SmileySans.txt"
       ]
+    },
+    {
+      "slug": "ad_games/who-dies",
+      "title": "猜谁先死",
+      "pitch": "锤子、炸弹、翘翘板一起开动之前，先猜几个火柴人里谁先倒下。",
+      "genre": "解谜",
+      "screen": "portrait",
+      "status": "beta",
+      "collection": "ad_games",
+      "accent": "#e8443a",
+      "dir": "../ad-games/games/who-dies",
+      "build": "npm run build:web",
+      "out": "dist-web",
+      "licenseFiles": [
+        "../../kit/fonts-src/OFL-SmileySans.txt"
+      ]
+    },
+    {
+      "slug": "ad_games/sand-blocks",
+      "title": "沙画消除",
+      "pitch": "点一杯彩沙，沙子流进同色的格子，一层层把像素画填满。",
+      "genre": "解谜",
+      "screen": "portrait",
+      "status": "beta",
+      "collection": "ad_games",
+      "accent": "#f39a2b",
+      "dir": "../ad-games/games/sand-blocks",
+      "build": "npm run build:web",
+      "out": "dist-web",
+      "licenseFiles": [
+        "../../kit/fonts-src/OFL-SmileySans.txt"
+      ]
     }
   ]
 }
