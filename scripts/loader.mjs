@@ -145,15 +145,22 @@ const SCRIPT = `(function () {
 })();`;
 
 /**
- * Writes the loading screen into site/<slug>/index.html (replacing an earlier one). Returns the bytes
- * it waits for, and the files and bytes it leaves to the page (games.json `lazy`).
+ * Writes the loading screen into site/<slug>/index.html, just before </body> (replacing an earlier one,
+ * so a page comes out the same however often the hub is rebuilt). Returns the bytes it waits for, and
+ * the files and bytes it leaves to the page (games.json `lazy`).
  */
 export function injectLoader({ site, game, onAccent }) {
   const dir = join(site, game.slug);
   const page = join(dir, 'index.html');
   let html = readFileSync(page, 'utf8');
+  // an earlier loading screen goes out together with the whitespace around it: otherwise every rebuild
+  // leaves one more blank line before </body>
   const at = html.indexOf(START);
-  if (at >= 0) html = html.slice(0, at) + html.slice(html.indexOf(END) + END.length);
+  if (at >= 0) {
+    const end = html.indexOf(END, at);
+    if (end < 0) throw new Error(`${game.slug}: index.html has ${START} but no ${END}`);
+    html = `${html.slice(0, at).trimEnd()}\n${html.slice(end + END.length).trimStart()}`;
+  }
   const lazy = (game.lazy ?? []).map((g) => [g, globToRe(g)]);
   const unused = new Set(lazy.map(([g]) => g));
   const left = { files: 0, bytes: 0 };
@@ -205,7 +212,7 @@ export function injectLoader({ site, game, onAccent }) {
 ${END}`;
   const close = html.lastIndexOf('</body>');
   if (close < 0) throw new Error(`${game.slug}: index.html has no </body>`);
-  html = html.slice(0, close) + block + '\n' + html.slice(close);
+  html = `${html.slice(0, close).trimEnd()}\n${block}\n${html.slice(close)}`;
   writeFileSync(page, html);
   return { bytes: total, left };
 }
