@@ -6,6 +6,11 @@
 // would without it: nothing is held back. It downloads the game's files except the music (the same
 // requests the game makes, so the browser shares them through its cache) to show real progress,
 // then fades once the game's code has run, its fonts are in, and it has drawn two frames.
+//
+// A game can leave files to the page with games.json `lazy`: patterns relative to the game's folder
+// (`*` within one folder, `**` across folders), e.g. ["assets/jzw-mashanzheng-*.woff2"] for a font cut
+// into unicode-range slices, of which the browser fetches only the ones the page uses. Those files are
+// neither pre-downloaded nor counted in the bar; the page fetches them itself when it needs them.
 import { readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
@@ -22,6 +27,17 @@ const mix = (hex, other, t) => {
   const ch = (n, s) => Math.round(((n >> s) & 255) * (1 - t) + ((b >> s) & 255) * t);
   return `#${[16, 8, 0].map((s) => ch(a, s).toString(16).padStart(2, '0')).join('')}`;
 };
+
+/** a games.json `lazy` pattern as a RegExp over paths relative to the game's folder */
+function globToRe(glob) {
+  const body = glob.replace(/^\.?\//, '').split(/(\*\*\/?|\*|\?)/).map((part) => {
+    if (part === '**/' || part === '**') return '(?:.*/)?' + (part === '**' ? '.*' : '');
+    if (part === '*') return '[^/]*';
+    if (part === '?') return '[^/]';
+    return part.replace(/[.+^${}()|[\]\\]/g, '\\$&');
+  }).join('');
+  return new RegExp(`^${body}$`);
+}
 
 function files(dir, base = dir, out = []) {
   for (const name of readdirSync(dir)) {
@@ -128,14 +144,27 @@ const SCRIPT = `(function () {
   root.querySelector('.retry').onclick = function () { location.reload(); };
 })();`;
 
-/** Writes the loading screen into site/<slug>/index.html (replacing an earlier one). Returns the bytes it waits for. */
+/**
+ * Writes the loading screen into site/<slug>/index.html (replacing an earlier one). Returns the bytes
+ * it waits for, and the files and bytes it leaves to the page (games.json `lazy`).
+ */
 export function injectLoader({ site, game, onAccent }) {
   const dir = join(site, game.slug);
   const page = join(dir, 'index.html');
   let html = readFileSync(page, 'utf8');
   const at = html.indexOf(START);
   if (at >= 0) html = html.slice(0, at) + html.slice(html.indexOf(END) + END.length);
-  const list = files(dir).sort((a, b) => b[1] - a[1]);
+  const lazy = (game.lazy ?? []).map((g) => [g, globToRe(g)]);
+  const unused = new Set(lazy.map(([g]) => g));
+  const left = { files: 0, bytes: 0 };
+  const list = files(dir).filter(([f, size]) => {
+    const hits = lazy.filter(([, re]) => re.test(f.slice(2)));
+    hits.forEach(([g]) => unused.delete(g));
+    if (hits.length) { left.files++; left.bytes += size; }
+    return !hits.length;
+  }).sort((a, b) => b[1] - a[1]);
+  // a pattern that matches nothing is usually a typo or a renamed file: say so at build time
+  for (const g of unused) console.warn(`loading screen: ${game.slug}: lazy pattern ${JSON.stringify(g)} matches no file`);
   const total = list.reduce((t, f) => t + f[1], 0);
   const accent = game.accent;
   const ink = '#221f2e';
@@ -178,5 +207,5 @@ ${END}`;
   if (close < 0) throw new Error(`${game.slug}: index.html has no </body>`);
   html = html.slice(0, close) + block + '\n' + html.slice(close);
   writeFileSync(page, html);
-  return total;
+  return { bytes: total, left };
 }

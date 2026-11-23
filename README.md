@@ -52,6 +52,9 @@ node scripts/publish.mjs         # 检查通过后把 site/ 提交到 gh-pages �
 3. 在 `games.json` 里加一项：`slug`（网址里的名字）、`title`、`pitch`、`genre`（要有对应的 `g-<类型>` 图标，
    在 `portal/icons.svg`）、`screen`（`portrait` / `landscape` / `desktop`）、`status`（`live` / `beta` / `wip`）、
    `accent`、`dir`，以及 `build` + `out`，或者纯静态游戏用 `copy`。
+   可选 `lazy`：加载页不预下载、也不算进进度条的文件，写相对游戏目录的通配（`*` 不跨目录，`**` 跨目录），
+   比如按 unicode-range 切片的字体 `["assets/jzw-mashanzheng-*.woff2"]`：浏览器只取页面用到的那几片，加载页不该把整套都下完。
+   构建会打印留给页面的文件数和大小；一个通配一个文件都没对上会警告（多半是写错或改了名）。
 4. `node scripts/build.mjs <slug>`、`node scripts/covers.mjs <slug>`、`node scripts/build.mjs --hub-only`，看一眼，发布。
 
 ## 合集（真·广告游戏）

@@ -64,8 +64,9 @@ const { games: shown, text: hubText } = await renderHub({ hub: HUB, site: SITE, 
 writeFileSync(join(SITE, 'licenses.txt'), licenses(shown));
 // every game page gets the hub's loading screen (again, if it already had one)
 for (const g of shown) {
-  const bytes = injectLoader({ site: SITE, game: g, onAccent: onAccent(g.accent) });
-  console.log(`loading screen: ${g.slug} waits for ${(bytes / 1048576).toFixed(1)} MB`);
+  const { bytes, left } = injectLoader({ site: SITE, game: g, onAccent: onAccent(g.accent) });
+  const lazy = left.files ? ` (${left.files} files, ${(left.bytes / 1048576).toFixed(1)} MB left to the page: lazy)` : '';
+  console.log(`loading screen: ${g.slug} waits for ${(bytes / 1048576).toFixed(1)} MB${lazy}`);
 }
 const text = hubText + LOADER_TEXT;
 // GitHub Pages: serve the files as they are (no Jekyll)
