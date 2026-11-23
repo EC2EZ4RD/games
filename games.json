@@ -128,6 +128,7 @@
       "dir": "../jiangzaiwai",
       "build": "npx tsc --noEmit && npx vite build --base ./ --outDir {stage} --emptyOutDir",
       "out": "{stage}",
+      "lazy": ["assets/??-*.woff2"],
       "coverQuery": "?army=spear:zhangfei,sword:simayi,hammer:dengai,archer:mulan,rider:zhaoyun&foe=sword,hammer,rider,archer,spear&famous=1",
       "coverWait": 20
     },
