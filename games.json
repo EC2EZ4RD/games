@@ -133,6 +133,34 @@
       "coverWait": 20
     },
     {
+      "slug": "ad_games/zongshi",
+      "title": "宗师之上",
+      "pitch": "合成秘籍、打通周天，从一重武徒一路修到武林宗师。",
+      "genre": "合成",
+      "screen": "portrait",
+      "status": "beta",
+      "collection": "ad_games",
+      "accent": "#2d9d8f",
+      "dir": "../zongshi",
+      "build": "npm run build:web",
+      "out": "dist-web",
+      "lazy": [
+        "scenes_unity/**",
+        "models_anim/mon_*.glb",
+        "models_anim/weapons/**",
+        "game-assets/models/**",
+        "game-assets/textures/assets/artres/**",
+        "game-assets/textures/assets/resourcesab/ui_new/uiimage/**",
+        "game-assets/textures/assets/resourcesab/ui_new/uiimage_l/map/**",
+        "game-assets/textures/assets/resourcesab/ui_new/uiimage_l/weapon/**",
+        "game-assets/textures/_bundles/**",
+        "ui_sprites/**",
+        "vfx_unity/**"
+      ],
+      "coverQuery": "?cover=1",
+      "coverWait": 6
+    },
+    {
       "slug": "ad_games/gate-shooter",
       "title": "数字门",
       "pitch": "带着小队冲过 ×3、+10 的门，从 1 人打到 1 万人。",
