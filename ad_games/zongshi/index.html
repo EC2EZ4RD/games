@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>宗师之上</title>
+  <link rel="stylesheet" href="./css/style.css?v=14" />
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "./vendor/three/build/three.module.js",
+        "three/addons/": "./vendor/three/examples/jsm/"
+      }
+    }
+  </script>
+</head>
+<body>
+  <div id="app-backdrop"></div>
+
+  <div id="layout-root">
+    <!-- 1080×1920 等比 9:16 竖屏游戏主舞台（100% 纯净原版 UI 图集与美术） -->
+    <div id="game-shell">
+      <!-- 登录开屏（1:1 原版 login.mp4 御剑登仙动态视频 + 零起点创角起名 + 解锁真实 BGM 音频） -->
+      <div id="splash-screen">
+        <video class="splash-video-bg" src="./game-assets/apk/assets/Videos/login.mp4" autoplay loop muted playsinline></video>
+        <div class="splash-overlay"></div>
+        <div class="splash-content">
+          <div class="splash-name-row">
+            <span class="splash-name-label">少侠名号</span>
+            <input id="inp-player-name" class="splash-name-input" type="text" maxlength="8" value="嵩山少侠" placeholder="输入侠客名号" />
+            <button id="btn-rand-name" class="splash-rand-btn" type="button" title="随机生成武侠名号">随机</button>
+          </div>
+          <button id="btn-enter-game" class="btn-gold-lg">踏入江湖</button>
+          <div class="splash-hint">武徒·一重 · 关卡 1-1 全新零起点开局</div>
+        </div>
+      </div>
+
+      <!-- 顶部全局状态栏（严格对齐 003_enter.png / 012_tab_shimen.png ComTopPlayerMini） -->
+      <header id="top-bar">
+        <button id="pill-realm" class="top-pill realm-pill" title="点击前往修为突破">
+          <img class="realm-npc-icon" src="./ui_sprites/com_playerinfo_npc.png" alt="" />
+          <span class="realm-text">
+            <strong id="hud-realm-name">武者·一重</strong>
+            <small id="hud-realm-pct">4.67%</small>
+          </span>
+          <img id="realm-red-dot" class="badge-dot hidden" src="./ui_sprites/com_tag_redpoint_01.png" alt="!" />
+        </button>
+
+        <div class="top-pill power-pill">
+          <img class="hud-icon" src="./ui_sprites/com_power_icon2.png" alt="" />
+          <span id="hud-power">61833</span>
+        </div>
+
+        <!-- 货币胶囊仅在师门/天书/背包等界面展示，练功页按 003_enter.png 自动隐藏 -->
+        <div id="pill-currency" class="top-pill stone-pill hidden" title="灵石（研习秘籍、天书、强化）">
+          <img class="hud-icon" src="./game-assets/textures/assets/resourcesab/ui_new/uiimage/icon/item/1351.png" alt="" />
+          <span id="hud-stone">360</span>
+          <button id="btn-currency-plus" class="currency-plus-btn" title="获取灵石补给">
+            <img src="./ui_sprites/com_btn_icon_02.png" alt="+" />
+          </button>
+        </div>
+      </header>
+
+      <!-- 主内容区域（6大页签切换，全屏透底 3D 画布！） -->
+      <main id="viewport">
+        <!-- TAB 3: 练功（1:1 对照 003_enter.png：全屏 3D 林间砂土路 + 原版图集 HUD + 无杂物透底合成牌桌） -->
+        <section id="tab-lianggong" class="tab-view active">
+          <div id="battle-stage">
+            <canvas id="battle-webgl"></canvas>
+            <canvas id="battle-canvas"></canvas>
+          </div>
+
+          <!-- 上半屏战斗浮动 HUD（100% 原版 wooden.ab / worldcombat.ab / com.ab 精灵） -->
+          <div class="battle-hud-overlay">
+            <div class="battle-left-hud">
+              <button id="btn-stage-info" class="stage-badge-btn" title="关卡详情">
+                <div class="stage-circle-icon">
+                  <img class="chapter-crest" src="./ui_sprites/wooden_icon_chapter.png" alt="" />
+                  <span class="stage-zoom-badge">
+                    <img src="./ui_sprites/wooden_btn_detail.png" alt="" />
+                  </span>
+                </div>
+                <span id="hud-stage-tag" class="stage-white-pill">小怪 1-1</span>
+              </button>
+
+              <div class="wave-vert-wrap">
+                <div class="wave-bar">
+                  <div id="hud-wave-fill"></div>
+                </div>
+                <div class="wave-nums">
+                  <span class="wave-row">
+                    <img src="./ui_sprites/wooden_icon_boss.png" alt="" />
+                    <b id="hud-enemy-rem">x7</b>
+                  </span>
+                  <span class="wave-row">
+                    <img src="./ui_sprites/com_map_icon_clock.png" alt="" />
+                    <b id="hud-timer">108秒</b>
+                  </span>
+                </div>
+              </div>
+
+              <button id="btn-idle-bag" class="float-pouch-btn" title="挂机奖励">
+                <img class="pouch-bg" src="./ui_sprites/com_btn_function_bg_02.png" alt="" />
+                <img class="pouch-icon" src="./ui_sprites/worldcombat_icon_gain.png" alt="挂机" />
+                <img id="idle-dot" class="badge-dot hidden" src="./ui_sprites/com_tag_redpoint_02.png" alt="" />
+              </button>
+
+              <button id="btn-quick-tianshu" class="float-tianshu-btn" title="天书">
+                <img class="ts-bg" src="./ui_sprites/com_btn_white_bg.png" alt="" />
+                <img class="ts-icon" src="./ui_sprites/wooden_btn_skill.png" alt="天书" />
+                <small>天书</small>
+                <img id="tianshu-dot" class="badge-dot hidden" src="./ui_sprites/com_tag_redpoint_02.png" alt="" />
+              </button>
+            </div>
+
+            <div class="battle-right-hud">
+              <button id="btn-speed" class="speed-btn">x1</button>
+              <button id="btn-bond-lotus" class="hex-bond-btn" title="查看门派羁绊">
+                <img class="hex-bg" src="./ui_sprites/wooden_skill_link_bg.png" alt="" />
+                <div id="bond-hex-petals" class="hex-petals">
+                  <img class="hex-petal p0" src="./ui_sprites/wooden_skill_2001_02.png" alt="" />
+                  <img class="hex-petal p1" src="./ui_sprites/wooden_skill_2001_02.png" alt="" />
+                  <img class="hex-petal p2" src="./ui_sprites/wooden_skill_2001_02.png" alt="" />
+                  <img class="hex-petal p3" src="./ui_sprites/wooden_skill_2001_02.png" alt="" />
+                  <img class="hex-petal p4" src="./ui_sprites/wooden_skill_2001_02.png" alt="" />
+                  <img class="hex-petal p5" src="./ui_sprites/wooden_skill_2001_02.png" alt="" />
+                </div>
+              </button>
+            </div>
+
+            <!-- 左下「前往领奖 / 师姐的教诲」原版渐变任务条 (003_enter.png + 042_chapter_claim.png) -->
+            <button id="btn-quest-bar" class="quest-banner">
+              <span id="hud-quest-text">前往领奖</span>
+              <img id="quest-dot" class="quest-chest-dot" src="./ui_sprites/com_tag_redpoint_02.png" alt="" />
+            </button>
+          </div>
+
+          <!-- 下半屏悬浮区：5+1 原版上阵槽 + 100% 透底无杂物 6×3 合成棋盘 -->
+          <div class="battle-bottom-deck">
+            <div id="skill-slots-wrap">
+              <div id="skill-slots" class="skill-slots"></div>
+            </div>
+
+            <div id="merge-panel">
+              <div id="merge-grid" class="merge-grid"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB 1: 角色（1:1 对照 006_tab_role.png 全屏 3D 草原展示 + 原版头像顶栏 + 悬浮属性与装备格） -->
+        <section id="tab-role" class="tab-view">
+          <div class="role-screen" id="role-screen"></div>
+        </section>
+
+        <!-- TAB 2: 师门（总览 + 修为 + 天书 + 神兵） -->
+        <section id="tab-shimen" class="tab-view">
+          <div id="shimen-container" class="shimen-container"></div>
+        </section>
+
+        <!-- TAB 4: 游历 -->
+        <section id="tab-youli" class="tab-view">
+          <div id="youli-container" class="youli-container"></div>
+        </section>
+
+        <!-- TAB 5: 帮派 -->
+        <section id="tab-bangpai" class="tab-view">
+          <div id="bangpai-container" class="bangpai-container"></div>
+        </section>
+
+        <!-- TAB 6: 背包 -->
+        <section id="tab-bag" class="tab-view">
+          <div id="bag-container" class="bag-container"></div>
+        </section>
+      </main>
+
+      <!-- 底部 6 大四叶菱形导航栏（1:1 复刻 WorldCombatBottom：仅选中态展露彩绘立绘图标，未选中为纯净四叶菱形，未解锁带灰锁） -->
+      <nav id="bottom-nav">
+        <button class="nav-btn" data-tab="role">
+          <img class="nav-diamond-bg" src="./ui_sprites/worldcombat_idle_buttom.png" alt="" />
+          <img class="nav-active-art" src="./game-assets/textures/assets/resourcesab/ui_new/uiimage/icon/function/worldcombat_active_character.png" alt="" />
+          <span class="nav-label">角色</span>
+        </button>
+        <button class="nav-btn" data-tab="shimen">
+          <img class="nav-diamond-bg" src="./ui_sprites/worldcombat_idle_buttom.png" alt="" />
+          <img class="nav-active-art" src="./game-assets/textures/assets/resourcesab/ui_new/uiimage/icon/function/worldcombat_active_gate_01.png" alt="" />
+          <span class="nav-label">师门</span>
+          <img id="nav-dot-shimen" class="nav-chest-dot hidden" src="./ui_sprites/com_tag_redpoint_02.png" alt="" />
+        </button>
+        <button class="nav-btn active" data-tab="lianggong">
+          <img class="nav-diamond-bg" src="./ui_sprites/worldcombat_active_buttom.png" alt="" />
+          <img class="nav-active-art" src="./game-assets/textures/assets/resourcesab/ui_new/uiimage/icon/function/worldcombat_active_wooden_01.png" alt="" />
+          <span class="nav-label">练功</span>
+          <img id="nav-dot-lianggong" class="nav-chest-dot hidden" src="./ui_sprites/com_tag_redpoint_02.png" alt="" />
+        </button>
+        <button class="nav-btn locked-look" data-tab="youli">
+          <img class="nav-diamond-bg" src="./ui_sprites/worldcombat_lock_buttom.png" alt="" />
+          <img class="nav-active-art" src="./game-assets/textures/assets/resourcesab/ui_new/uiimage/icon/function/worldcombat_active_world_01.png" alt="" />
+          <span class="nav-label">游历</span>
+        </button>
+        <button class="nav-btn locked-look" data-tab="bangpai">
+          <img class="nav-diamond-bg" src="./ui_sprites/worldcombat_lock_buttom.png" alt="" />
+          <img class="nav-active-art" src="./game-assets/textures/assets/resourcesab/ui_new/uiimage/icon/function/worldcombat_active_guild_01.png" alt="" />
+          <span class="nav-label">帮派</span>
+        </button>
+        <button class="nav-btn" data-tab="bag">
+          <img class="nav-diamond-bg" src="./ui_sprites/worldcombat_idle_buttom.png" alt="" />
+          <img class="nav-active-art" src="./game-assets/textures/assets/resourcesab/ui_new/uiimage/icon/function/worldcombat_active_bag.png" alt="" />
+          <span class="nav-label">背包</span>
+        </button>
+      </nav>
+
+      <!-- 通用弹窗层 (KawaseBlur) / 恭喜获得全屏金芒 / Toast / 拖拽幽灵 -->
+      <div id="modal-root" class="hidden"></div>
+      <div id="reveal-root" class="hidden"></div>
+      <div id="toast-root"></div>
+      <div id="drag-ghost" class="hidden"></div>
+    </div>
+
+    <!-- 手机窄屏专属侧边折叠悬浮球（桌面端自动隐藏，方便内部同事手机浏览器全屏试玩时呼出助手） -->
+    <button id="btn-mobile-sb" class="mobile-sb-fab hidden" type="button" title="展开/收起体验助手">助手</button>
+
+    <!-- 桌面端右侧可选「本地体验助手」面板（所有调试/辅助按钮外置，保持左侧手机框 100% 纯净原版画面！） -->
+    <aside id="sandbox-panel">
+      <div class="sb-header">
+        <h3>宗师之上 · 体验助手</h3>
+        <div style="display:flex;gap:6px;align-items:center">
+          <button id="btn-mute" class="sb-mute-btn" title="静音/开启原版配乐">配乐: 开</button>
+          <button id="btn-close-sb" class="sb-close-mobile" type="button">收起</button>
+        </div>
+      </div>
+      <div class="sb-section">
+        <h4>快捷合成与试玩工具</h4>
+        <div class="sb-btn-grid">
+          <button id="btn-comprehend" class="sb-btn gold">领悟新秘籍（消耗 60 灵石）</button>
+          <button id="btn-auto-merge" class="sb-btn jade">一键合成（当前升阶率 <span id="merge-pity-pct">50%</span>）</button>
+          <label class="sb-check-row">
+            <input type="checkbox" id="chk-batch-merge" checked />
+            <span>勾选后一键连续批量合成</span>
+          </label>
+          <button id="sb-gift" class="sb-btn amber">领取体验补给包（灵石+秘籍+混元青）</button>
+          <button id="sb-high" class="sb-btn purple">解锁全系统并投放红/橙绝学</button>
+          <button id="sb-xp" class="sb-btn jade">充满当前境界修为</button>
+          <button id="sb-jump-boss" class="sb-btn amber">直面当前章节首领</button>
+          <button id="sb-next-ch" class="sb-btn blue">切换下一章节地貌</button>
+          <button id="sb-reset" class="sb-btn danger">从零重新开始（清空存档回开屏）</button>
+        </div>
+      </div>
+      <div class="sb-section">
+        <h4>核心机制说明</h4>
+        <ul>
+          <li><b>二合一升阶：</b>拖 2 本同品秘籍叠放，基础 50% 升阶，每次失败 +25% 保底必成！</li>
+          <li><b>经验球升重：</b>同色球二合一，拖至武学槽提升重数（每 5 重额外 +13.5% 爆发）！</li>
+          <li><b>师姐的教诲：</b>点击左下「前往领奖」打开章节任务领取混元青与紫秘籍！</li>
+        </ul>
+      </div>
+      <div class="sb-section sb-live">
+        <h4>当前实时属性</h4>
+        <div id="sb-stats-box" class="sb-stats-box"></div>
+      </div>
+    </aside>
+  </div>
+
+  <script type="module" src="./js/main.js?v=14"></script>
+<!-- hub-loader:start -->
+<style>
+@font-face{font-family:'Hub Display';src:url('../../fonts/hub-display.woff2') format('woff2');font-display:swap}
+#hub-ld{position:fixed;top:0;left:0;right:0;bottom:0;z-index:2147483000;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;box-sizing:border-box;background:#2d9d8f;background:radial-gradient(120% 80% at 82% 0%,rgba(255,255,255,.3),rgba(255,255,255,0) 62%),linear-gradient(165deg,#53afa3,#2d9d8f 55%,#207167);color:#fff;font-family:system-ui,-apple-system,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;text-align:center;opacity:1;transition:opacity .4s ease;-webkit-user-select:none;user-select:none;touch-action:none}
+#hub-ld.out{opacity:0;pointer-events:none}
+#hub-ld *{box-sizing:border-box}
+#hub-ld h1{margin:0;font:400 44px/1.12 'Hub Display','PingFang SC','Microsoft YaHei',sans-serif;letter-spacing:.02em;color:#fff;text-shadow:3px 3px 0 #221f2e}
+#hub-ld .p{margin:12px 0 0;max-width:21em;font-size:14px;line-height:1.6;color:#221f2e}
+#hub-ld .bar{position:relative;width:300px;max-width:72vw;height:26px;margin:52px 0 0;background:#fffcf6;border:3px solid #221f2e;border-radius:11px;box-shadow:4px 4px 0 #221f2e}
+#hub-ld .fill{position:absolute;left:0;top:0;bottom:0;width:0;background:#221f2e;border-radius:7px;transition:width .25s ease}
+#hub-ld .flag{position:absolute;bottom:100%;left:0;width:26px;height:32px;margin:0 0 -5px -4px;transition:left .25s ease}
+#hub-ld .num{margin:14px 0 0;font:400 24px/1 'Hub Display',sans-serif;color:#fff;text-shadow:2px 2px 0 #221f2e}
+#hub-ld .mb{margin-left:10px;font:13px/1 system-ui,-apple-system,sans-serif;color:#221f2e;text-shadow:none}
+#hub-ld .hint{min-height:1.6em;margin:14px 0 0;font-size:13px;color:#221f2e}
+#hub-ld .retry{display:none;margin:14px 0 0;padding:11px 24px 9px;font:400 20px/1 'Hub Display','PingFang SC','Microsoft YaHei',sans-serif;color:#221f2e;background:#fffcf6;border:3px solid #221f2e;border-radius:12px;box-shadow:0 5px 0 #221f2e;cursor:pointer}
+#hub-ld.fail .retry{display:inline-block}
+#hub-ld.fail .bar,#hub-ld.fail .num{opacity:.45}
+@media (max-width:400px){#hub-ld h1{font-size:36px}}
+@media (min-width:900px) and (min-height:560px){#hub-ld h1{font-size:64px}#hub-ld .p{max-width:26em;font-size:16px}#hub-ld .bar{width:400px;height:30px}#hub-ld .flag{width:30px;height:37px}#hub-ld .num{font-size:28px}}
+@media (prefers-reduced-motion:reduce){#hub-ld,#hub-ld .fill,#hub-ld .flag{transition:none}}
+</style>
+<div id="hub-ld" role="progressbar" aria-label="宗师之上 加载中" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+<h1>宗师之上</h1>
+<p class="p">合成秘籍、打通周天，从一重武徒一路修到武林宗师。</p>
+<div class="bar"><div class="fill"></div><svg class="flag" viewBox="0 0 26 32" aria-hidden="true"><path d="M4 30V4" stroke="#221f2e" stroke-width="3" stroke-linecap="round" fill="none"/><path d="M5.5 4.5h16.5l-4.4 5.3 4.4 5.3H5.5z" fill="#f2b632" stroke="#221f2e" stroke-width="2.4" stroke-linejoin="round"/></svg></div>
+<div class="num"><span class="pct">0%</span><span class="mb"></span></div>
+<p class="hint"></p>
+<button class="retry" type="button">重新加载</button>
+</div>
+<script>(function () {
+  var C = {"files":[["./game-assets/textures/assets/resourcesab/ui_new/uiimage_l/login/login_bg_01.png",1896798],["./models_anim/hero.glb",1727216],["./vendor/three/build/three.core.js",1474799],["./vendor/three/build/three.module.js",658900],["./game-assets/textures/assets/resourcesab/ui_new/uiimage_l/quality/quality_item_rectangle_05.png",210136],["./game-assets/textures/assets/resourcesab/ui_new/uiimage_l/worldcombat/worldcombat_bg_buttom.png",209128],["./game-assets/textures/assets/resourcesab/ui_new/uiimage_l/quality/quality_item_rectangle_02.png",208138],["./game-assets/textures/assets/resourcesab/ui_new/uiimage_l/quality/quality_item_rectangle_03.png",203014],["./game-assets/textures/assets/resourcesab/ui_new/uiimage_l/quality/quality_item_rectangle_06.png",200593],["./game-assets/textures/assets/resourcesab/ui_new/uiimage_l/quality/quality_item_rectangle_04.png",184152],["./game-assets/textures/assets/resourcesab/ui_new/uiimage_l/quality/quality_item_rectangle_01.png",166044],["./vendor/three/examples/jsm/loaders/GLTFLoader.js",119861],["./js/ui.js",112842],["./css/style.css",45952],["./vendor/three/examples/jsm/utils/BufferGeometryUtils.js",39153],["./js/scene3d.js",37322],["./js/state.js",33055],["./js/data.js",32810],["./js/battle.js",31498],["./vendor/three/examples/jsm/loaders/OBJLoader.js",23300],["./game-assets/textures/assets/resourcesab/ui_new/uiimage_l/com/com_btn_big_green.png",20859],["./js/vfx3d.js",14661],["./js/grassField.js",12296],["./vendor/three/examples/jsm/loaders/MTLLoader.js",11636],["./vendor/three/examples/jsm/utils/SkeletonUtils.js",11535],["./js/fxStandardShader.js",8603],["./js/toonShader.js",6445],["./js/main.js",5440],["./js/audio.js",3671]],"total":7709857};
+  var d = document, root = d.getElementById('hub-ld');
+  if (!root) return;
+  var fill = root.querySelector('.fill'), flag = root.querySelector('.flag'), pct = root.querySelector('.pct');
+  var mb = root.querySelector('.mb'), hint = root.querySelector('.hint');
+  var t0 = Date.now(), got = 0, filesDone = 0, modules = -1, loaded = 0, over = false, failed = false, gone = false, queued = false;
+  var size = function (b) { return (b / 1048576).toFixed(1); };
+  function paint() {
+    queued = false;
+    var f = C.total ? Math.min(1, got / C.total) : 1, p = Math.floor(f * 100);
+    fill.style.width = (f * 100) + '%';
+    flag.style.left = (f * 100) + '%';
+    pct.textContent = p + '%';
+    mb.textContent = size(Math.min(got, C.total)) + ' / ' + size(C.total) + ' MB';
+    root.setAttribute('aria-valuenow', String(p));
+    // everything is in: the game is starting up (parsing its code, building its first frame)
+    if (f >= 1 && !failed) hint.textContent = '\u6b63\u5728\u542f\u52a8\u2026';
+  }
+  function count(n) {
+    got += n;
+    if (queued) return;
+    queued = true;
+    (window.requestAnimationFrame || setTimeout)(paint);
+  }
+  paint();
+  // the game's files: the browser fetches them for the game at the same time and shares them
+  if (window.fetch && C.files.length) {
+    C.files.forEach(function (f) {
+      var url = f[0], want = f[1], seen = 0;
+      var settle = function () { if (seen < want) count(want - seen); seen = want; filesDone++; check(); };
+      fetch(url, { credentials: 'same-origin' }).then(function (res) {
+        if (!res.ok || !res.body || !res.body.getReader) return res.arrayBuffer();
+        var rd = res.body.getReader();
+        var pump = function () {
+          return rd.read().then(function (r) {
+            if (r.done) return;
+            var n = Math.min(r.value.length, want - seen);
+            if (n > 0) { seen += n; count(n); }
+            return pump();
+          });
+        };
+        return pump();
+      }).then(settle, settle);
+    });
+  } else {
+    filesDone = C.files.length;
+  }
+  // the game has started once each of its module scripts has run
+  var isModule = function (t) { return t && t.tagName === 'SCRIPT' && t.type === 'module'; };
+  d.addEventListener('load', function (e) { if (isModule(e.target)) { loaded++; check(); } }, true);
+  d.addEventListener('error', function (e) { if (isModule(e.target)) fail(); }, true);
+  var countModules = function () { modules = d.querySelectorAll('script[type="module"][src]').length; check(); };
+  if (d.readyState === 'loading') d.addEventListener('DOMContentLoaded', countModules); else countModules();
+  var tick = setInterval(function () {
+    if (over || failed) { clearInterval(tick); return; }
+    if (Date.now() - t0 > 9000 && got < C.total) hint.textContent = '\u7f51\u7edc\u6709\u70b9\u6162\uff0c\u6b63\u5728\u52aa\u529b\u52a0\u8f7d\u2026';
+    check();
+  }, 1000);
+  function check() {
+    if (over || failed) return;
+    var started = modules >= 0 && loaded >= modules;
+    if (started && (filesDone >= C.files.length || Date.now() - t0 > 25000)) finish();
+  }
+  function frames(n, cb) {
+    if (!window.requestAnimationFrame) { setTimeout(cb, 50); return; }
+    requestAnimationFrame(function () { if (n > 1) frames(n - 1, cb); else cb(); });
+  }
+  function finish() {
+    over = true;
+    got = C.total;
+    paint();
+    var go = function () { frames(2, hide); };
+    if (d.fonts && d.fonts.ready) d.fonts.ready.then(go, go); else go();
+    setTimeout(hide, 4000); // never keep the game covered for long
+  }
+  function hide() {
+    if (gone) return;
+    gone = true;
+    root.className += ' out';
+    setTimeout(function () { if (root.parentNode) root.parentNode.removeChild(root); }, 450);
+  }
+  function fail() {
+    if (over || failed) return;
+    failed = true;
+    root.className += ' fail';
+    hint.textContent = '\u6ca1\u52a0\u8f7d\u51fa\u6765\uff0c\u53ef\u80fd\u662f\u7f51\u7edc\u65ad\u4e86';
+  }
+  root.querySelector('.retry').onclick = function () { location.reload(); };
+})();</script>
+<!-- hub-loader:end -->
+</body>
+</html>

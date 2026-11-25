@@ -1,0 +1,12 @@
+newmtl bigsword_0
+Kd 1 1 1
+map_Kd bigsword_0.png
+
+newmtl boss_dubi_001_0
+Kd 1 1 1
+map_Kd boss_dubi_001_0.png
+
+newmtl qianqiao_0
+Kd 1 1 1
+map_Kd qianqiao_0.png
+

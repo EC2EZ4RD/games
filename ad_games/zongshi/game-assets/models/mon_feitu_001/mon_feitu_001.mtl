@@ -1,0 +1,8 @@
+newmtl mon_feitu_001_0
+Kd 1 1 1
+map_Kd mon_feitu_001_0.png
+
+newmtl dao_0
+Kd 1 1 1
+map_Kd dao_0.png
+

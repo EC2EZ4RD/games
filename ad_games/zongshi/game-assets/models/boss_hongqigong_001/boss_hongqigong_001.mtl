@@ -1,0 +1,12 @@
+newmtl boss_hongqigong_001_0
+Kd 1 1 1
+map_Kd boss_hongqigong_001_0.png
+
+newmtl wp_gun_hongqigong_001_0
+Kd 1 1 1
+map_Kd wp_gun_hongqigong_001_0.png
+
+newmtl wp_jitui_hongqigong_001_0
+Kd 1 1 1
+map_Kd wp_jitui_hongqigong_001_0.png
+

@@ -8,7 +8,7 @@
       "title": "真·广告游戏",
       "pitch": "那些点进去却不是它的小游戏广告，一款款做成了真的。",
       "accent": "#ff5c8a",
-      "count": 39
+      "count": 40
     }
   ],
   "games": [
@@ -105,6 +105,17 @@
       "note": "需要自备 AI Key（DeepSeek 等），在电脑上玩",
       "accent": "#3c8c7a",
       "tagsHtml": "<li><svg class=\"i\" aria-hidden=\"true\"><use href=\"#i-desktop\"/></svg>电脑</li><li><svg class=\"i\" aria-hidden=\"true\"><use href=\"#g-战棋\"/></svg>战棋</li>"
+    },
+    {
+      "slug": "ad_games/zongshi",
+      "title": "宗师之上",
+      "pitch": "合成秘籍、打通周天，从一重武徒一路修到武林宗师。",
+      "genre": "合成",
+      "screen": "portrait",
+      "status": "beta",
+      "accent": "#2d9d8f",
+      "collection": "ad_games",
+      "tagsHtml": "<li><svg class=\"i\" aria-hidden=\"true\"><use href=\"#i-portrait\"/></svg>竖屏</li><li><svg class=\"i\" aria-hidden=\"true\"><use href=\"#g-合成\"/></svg>合成</li>"
     },
     {
       "slug": "ad_games/gate-shooter",

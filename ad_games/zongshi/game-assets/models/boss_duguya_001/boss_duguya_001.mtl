@@ -1,0 +1,16 @@
+newmtl bingjian_0
+Kd 1 1 1
+map_Kd bingjian_0.png
+
+newmtl boss_duguya_001_0
+Kd 1 1 1
+map_Kd boss_duguya_001_0.png
+
+newmtl huo_0
+Kd 1 1 1
+map_Kd huo_0.png
+
+newmtl tui_0
+Kd 1 1 1
+map_Kd tui_0.png
+

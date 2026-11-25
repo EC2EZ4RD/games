@@ -1,0 +1,16 @@
+newmtl 01_0
+Kd 1 1 1
+map_Kd 01_0.png
+
+newmtl 02_0
+Kd 1 1 1
+map_Kd 02_0.png
+
+newmtl 03_0
+Kd 1 1 1
+map_Kd 03_0.png
+
+newmtl boss_zhen_001_0
+Kd 1 1 1
+map_Kd boss_zhen_001_0.png
+
